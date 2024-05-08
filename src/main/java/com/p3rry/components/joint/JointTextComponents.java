@@ -1,4 +1,4 @@
-package com.p3rry.components.panels.jointpanel;
+package com.p3rry.components.joint;
 
 import com.p3rry.components.utlis.InputBlocker;
 import lombok.Getter;
@@ -26,9 +26,7 @@ public class JointTextComponents {
         this.bevelAngleTextField = inputBlock.numberLimitInput();
         this.roundingTextField = inputBlock.numberLimitInput();
         this.lengthTextField = inputBlock.numberLimitInput();
-
         this.qualityLevelTextField = inputBlock.qualityLevelLimitInput();
-
         this.legSizeTextField = inputBlock.numberLimitInput();
     }
 }

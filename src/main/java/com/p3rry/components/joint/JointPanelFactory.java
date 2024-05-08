@@ -1,7 +1,7 @@
-package com.p3rry.components.panels.jointpanel;
+package com.p3rry.components.joint;
 
-import com.p3rry.components.panels.jointpanel.jointbuttweldpanel.*;
-import com.p3rry.components.panels.jointpanel.jointfilletweldpanel.TSingleSidedJointPanel;
+import com.p3rry.components.joint.jointbuttweldpanel.*;
+import com.p3rry.components.joint.jointfilletweldpanel.TSingleSidedJointPanel;
 import lombok.NonNull;
 
 public class JointPanelFactory {

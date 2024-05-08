@@ -1,17 +1,17 @@
-package com.p3rry.components.panels.jointpanel.jointfilletweldpanel;
+package com.p3rry.components.joint.jointbuttweldpanel;
 
-import com.p3rry.components.panels.jointpanel.AbstractJointPanel;
+import com.p3rry.components.joint.AbstractJointPanel;
 
-public class TSingleSidedJointPanel extends AbstractJointPanel {
+public class NoBevelJointPanel extends AbstractJointPanel {
     @Override
     public void addToList() {
         labelsList.add(jointLabels.getThicknessLabel());
-        labelsList.add(jointLabels.getLegSizeLabel());
+        labelsList.add(jointLabels.getGapLabel());
         labelsList.add(jointLabels.getLengthLabel());
         labelsList.add(jointLabels.getQualityLevelLabel());
 
         textComponentsList.add(jointTextComponents.getThicknessTextField());
-        textComponentsList.add(jointTextComponents.getLegSizeTextField());
+        textComponentsList.add(jointTextComponents.getGapTextField());
         textComponentsList.add(jointTextComponents.getLengthTextField());
         textComponentsList.add(jointTextComponents.getQualityLevelTextField());
     }

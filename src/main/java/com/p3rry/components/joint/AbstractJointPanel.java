@@ -1,6 +1,5 @@
-package com.p3rry.components.panels.jointpanel;
+package com.p3rry.components.joint;
 
-import com.p3rry.components.Frame;
 import com.p3rry.components.componentsmanagement.IComponentsAdder;
 import com.p3rry.components.componentsmanagement.IComponentsSetter;
 import com.p3rry.components.componentsmanagement.IListAdder;
@@ -9,14 +8,15 @@ import lombok.Getter;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractJointPanel implements IListAdder, IComponentsSetter, ISelfComponentSetter, IComponentsAdder {
-    private static final int PANEL_X_POSITION = 0;
-    private static final int PANEL_Y_POSITION = 140;
-    private static final int PANEL_WIDTH = Frame.FRAME_WIDTH;
-    private static final int PANEL_HEIGHT = 490;
+    public static final int PANEL_X_POSITION = 0;
+    public static final int PANEL_Y_POSITION = 140;
+    public static final int PANEL_WIDTH = 300;
+    public static final int PANEL_HEIGHT = 500;
 
     @Getter
     protected JPanel panel;
@@ -25,7 +25,7 @@ public abstract class AbstractJointPanel implements IListAdder, IComponentsSette
     protected List<JLabel> labelsList;
     protected List<JTextComponent> textComponentsList;
 
-    protected AbstractJointPanel() {
+    public AbstractJointPanel() {
         this.panel = new JPanel();
         this.jointLabels = new JointLabels();
         this.jointTextComponents = new JointTextComponents();
@@ -40,29 +40,29 @@ public abstract class AbstractJointPanel implements IListAdder, IComponentsSette
 
     @Override
     public void addComponents() {
-        this.labelsList.
-                forEach(label -> this.panel.add(label));
+        labelsList.
+                forEach(label -> panel.add(label));
 
-        this.textComponentsList.
-                forEach(textComponent -> this.panel.add(textComponent));
+        textComponentsList.
+                forEach(textComponent -> panel.add(textComponent));
     }
 
     @Override
     public void setSelfComponent() {
-        this.panel.setLayout(null);
-        this.panel.setBounds(PANEL_X_POSITION, PANEL_Y_POSITION,
+        panel.setLayout(null);
+        panel.setBounds(PANEL_X_POSITION, PANEL_Y_POSITION,
                 PANEL_WIDTH, PANEL_HEIGHT);
     }
 
     @Override
     public void setComponents() {
-        setListOfComponents(this.labelsList,70 , 0,
+        setListOfComponents(labelsList,70 , 0,
                 JointLabels.LABEL_WIDTH, JointLabels.LABEL_HEIGHT);
 
-        setListOfComponents(this.textComponentsList, 70, 30,
+        setListOfComponents(textComponentsList, 70, 30,
                 JointTextComponents.TEXT_COMPONENT_WIDTH, JointTextComponents.TEXT_COMPONENT_HEIGHT);
 
-        this.labelsList.
+        labelsList.
                 forEach(label -> {
             label.setVerticalAlignment(JLabel.CENTER);
             label.setHorizontalAlignment(JLabel.CENTER);

@@ -1,6 +1,5 @@
-package com.p3rry.components.panels.jointpanel;
+package com.p3rry.components.joint;
 
-import com.p3rry.components.Frame;
 import com.p3rry.components.componentsmanagement.IComponentsAdder;
 import com.p3rry.components.componentsmanagement.IComponentsSetter;
 import com.p3rry.components.componentsmanagement.ISelfComponentSetter;
@@ -13,16 +12,15 @@ import java.io.IOException;
 
 @Getter
 public class JointSelectionPanel implements ISelfComponentSetter, IComponentsSetter, IComponentsAdder {
+    public static final int PANEL_X_POSITION = 0;
+    public static final int PANEL_Y_POSITION = 0;
+    public static final int PANEL_WIDTH = 300;
+    public static final int PANEL_HEIGHT = 140;
 
-    private static final int PANEL_X_POSITION = 0;
-    private static final int PANEL_Y_POSITION = 0;
-    private static final int PANEL_WIDTH = Frame.FRAME_WIDTH;
-    private static final int PANEL_HEIGHT = 140;
-
-    private static final int JOINT_COMBOBOX_X_POSITION = 40;
-    private static final int JOINT_COMBOBOX_Y_POSITION = 10;
-    private static final int JOINT_COMBOBOX_WIDTH = 210;
-    private static final int JOINT_COMBOBOX_HEIGHT = 120;
+    public static final int JOINT_COMBOBOX_X_POSITION = 40;
+    public static final int JOINT_COMBOBOX_Y_POSITION = 10;
+    public static final int JOINT_COMBOBOX_WIDTH = 210;
+    public static final int JOINT_COMBOBOX_HEIGHT = 120;
 
     private JPanel panel;
     private JComboBox<Icon> jointComboBox;
@@ -38,22 +36,22 @@ public class JointSelectionPanel implements ISelfComponentSetter, IComponentsSet
 
     @Override
     public void setSelfComponent() {
-        this.panel.setLayout(null);
-        this.panel.setBounds(PANEL_X_POSITION, PANEL_Y_POSITION,
+        panel.setLayout(null);
+        panel.setBounds(PANEL_X_POSITION, PANEL_Y_POSITION,
                 PANEL_WIDTH, PANEL_HEIGHT);
-        this.panel.setBackground(Color.RED);
     }
 
     @Override
     public void addComponents() {
-        this.panel.add(this.jointComboBox);
+        panel.add(jointComboBox);
     }
 
     @Override
     public void setComponents() {
-        this.jointComboBox.setModel(loadIcons());
-        this.jointComboBox.setMaximumRowCount(2);
-        this.jointComboBox.setBounds(JOINT_COMBOBOX_X_POSITION, JOINT_COMBOBOX_Y_POSITION,
+        jointComboBox.setModel(loadIcons());
+        jointComboBox.setMaximumRowCount(2);
+        jointComboBox.setFocusable(false);
+        jointComboBox.setBounds(JOINT_COMBOBOX_X_POSITION, JOINT_COMBOBOX_Y_POSITION,
                 JOINT_COMBOBOX_WIDTH, JOINT_COMBOBOX_HEIGHT);
     }
 

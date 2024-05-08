@@ -1,8 +1,8 @@
-package com.p3rry.components.panels.jointpanel.jointbuttweldpanel;
+package com.p3rry.components.joint.jointbuttweldpanel;
 
-import com.p3rry.components.panels.jointpanel.AbstractJointPanel;
+import com.p3rry.components.joint.AbstractJointPanel;
 
-public class XBevelJointPanel extends AbstractJointPanel {
+public class YBevelJointPanel extends AbstractJointPanel {
     @Override
     public void addToList() {
         labelsList.add(jointLabels.getThicknessLabel());

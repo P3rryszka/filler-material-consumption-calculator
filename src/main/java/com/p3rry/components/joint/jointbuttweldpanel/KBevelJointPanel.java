@@ -1,8 +1,8 @@
-package com.p3rry.components.panels.jointpanel.jointbuttweldpanel;
+package com.p3rry.components.joint.jointbuttweldpanel;
 
-import com.p3rry.components.panels.jointpanel.AbstractJointPanel;
+import com.p3rry.components.joint.AbstractJointPanel;
 
-public class YBevelJointPanel extends AbstractJointPanel {
+public class KBevelJointPanel extends AbstractJointPanel {
     @Override
     public void addToList() {
         labelsList.add(jointLabels.getThicknessLabel());
@@ -18,5 +18,6 @@ public class YBevelJointPanel extends AbstractJointPanel {
         textComponentsList.add(jointTextComponents.getBeadTextField());
         textComponentsList.add(jointTextComponents.getLengthTextField());
         textComponentsList.add(jointTextComponents.getQualityLevelTextField());
+
     }
 }

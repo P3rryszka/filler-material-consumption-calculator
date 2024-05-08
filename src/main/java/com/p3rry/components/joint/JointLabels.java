@@ -1,4 +1,4 @@
-package com.p3rry.components.panels.jointpanel;
+package com.p3rry.components.joint;
 
 import lombok.Getter;
 
@@ -6,7 +6,6 @@ import javax.swing.*;
 
 @Getter
 public class JointLabels {
-
     public static final int LABEL_WIDTH = 160;
     public static final int LABEL_HEIGHT = 20;
 
