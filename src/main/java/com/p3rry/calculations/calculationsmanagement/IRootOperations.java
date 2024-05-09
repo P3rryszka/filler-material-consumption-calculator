@@ -29,5 +29,5 @@ public interface IRootOperations {
             throw new IllegalArgumentException("Issue with quality level value or thickness value. " +
                     "Quality level can be: " + QualityLevel.B + " " + QualityLevel.C + " " + QualityLevel.D +
                     " and thickness cannot be less than " + Properties.THICKNESS_LIMIT);
-    };
+    }
 }
