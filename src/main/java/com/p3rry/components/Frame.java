@@ -1,5 +1,12 @@
 package com.p3rry.components;
 
+import com.p3rry.calculations.calculationsmanagement.IWeldOperations;
+import com.p3rry.calculations.weld.Mass;
+import com.p3rry.calculations.weld.buttweld.UBevelJoint;
+import com.p3rry.calculations.weld.buttweld.XBevelJoint;
+import com.p3rry.calculations.weld.filletweld.TSingleSidedJoint;
+import com.p3rry.components.ControlPanel;
+import com.p3rry.components.ResultPanel;
 import com.p3rry.components.componentsmanagement.IListAdder;
 import com.p3rry.components.componentsmanagement.IListeningAdder;
 import com.p3rry.components.componentsmanagement.IComponentsAdder;
@@ -10,6 +17,9 @@ import com.p3rry.components.joint.JointPanelFactory;
 import com.p3rry.components.weldingmethod.AbstractWeldingMethodPanel;
 import com.p3rry.components.weldingmethod.WeldingMethodFactory;
 import com.p3rry.components.weldingmethod.WeldingMethodSelectionPanel;
+import com.p3rry.consts.Description;
+import com.p3rry.consts.Properties;
+import com.p3rry.consts.QualityLevel;
 import com.p3rry.consts.WeldingMethodType;
 import lombok.NonNull;
 
@@ -23,7 +33,7 @@ import java.util.Objects;
 
 public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSetter, IListAdder, IListeningAdder, ActionListener {
     public static final int FRAME_WIDTH = 495;
-    public static final int FRAME_HEIGHT = 660;
+    public static final int FRAME_HEIGHT = 670;
 
     private JointSelectionPanel jointSelectionPanel;
     private WeldingMethodSelectionPanel weldingMethodSelectionPanel;
@@ -40,6 +50,9 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
 
     private AbstractWeldingMethodPanel smawPanel;
     private AbstractWeldingMethodPanel gmawPanel;
+    ////
+    private IWeldOperations abstractWeld;
+    private Mass mass;
 
     private ControlPanel controlPanel;
     private ResultPanel resultPanel;
@@ -64,6 +77,12 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
 
         this.controlPanel = new ControlPanel();
         this.resultPanel = new ResultPanel();
+
+        //TESTING THINGS
+        this.abstractWeld = new XBevelJoint(10, QualityLevel.C, 2, 60, 2);
+        this.mass = new Mass(200, abstractWeld);
+        System.out.println(mass.calculateMass(Properties.STEEL_DENSITY_KG_MM3));
+        //**********************
 
         addToList();
         setSelfComponent();
@@ -108,7 +127,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         this.setTitle("Additional Material Consumption Calculator");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setBackground(Color.LIGHT_GRAY);
-        this.setResizable(true);
+        this.setResizable(false);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -128,17 +147,33 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
     private void selectJointPanel() {
         String selectedIcon = ((ImageIcon) Objects.requireNonNull(jointSelectionPanel.getJointComboBox().getSelectedItem())).getDescription();
 
-        switch (selectedIcon) {
-            case "noBevelJoint" -> {
+        switch (Description.valueOf(selectedIcon)) {
+            case NO_BEVEL_JOINT-> {
                 removeAddToFrame(noBevelJointPanel);
             }
 
-            case "kBevelJoint" -> {
+            case V_BEVEL_JOINT -> {
+                removeAddToFrame(vBevelJointPanel);
+            }
+
+            case Y_BEVEL_JOINT -> {
+                removeAddToFrame(yBevelJointPanel);
+            }
+
+            case K_BEVEL_JOINT -> {
                 removeAddToFrame(kBevelJointPanel);
             }
 
-            case "uBevelJoint" -> {
+            case X_BEVEL_JOINT -> {
+                removeAddToFrame(xBevelJointPanel);
+            }
+
+            case U_BEVEL_JOINT -> {
                 removeAddToFrame(uBevelJointPanel);
+            }
+
+            case T_SINGLE_SIDED_JOINT -> {
+                removeAddToFrame(tSingleSidedJointPanel);
             }
         }
     }

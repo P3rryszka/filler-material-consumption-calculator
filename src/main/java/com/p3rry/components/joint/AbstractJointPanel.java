@@ -8,7 +8,6 @@ import lombok.Getter;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,15 +19,15 @@ public abstract class AbstractJointPanel implements IListAdder, IComponentsSette
 
     @Getter
     protected JPanel panel;
-    protected JointLabels jointLabels;
-    protected JointTextComponents jointTextComponents;
+    protected JointLabel jointLabel;
+    protected JointTextComponent jointTextComponent;
     protected List<JLabel> labelsList;
     protected List<JTextComponent> textComponentsList;
 
     public AbstractJointPanel() {
         this.panel = new JPanel();
-        this.jointLabels = new JointLabels();
-        this.jointTextComponents = new JointTextComponents();
+        this.jointLabel = new JointLabel();
+        this.jointTextComponent = new JointTextComponent();
         this.labelsList = new ArrayList<>();
         this.textComponentsList = new ArrayList<>();
 
@@ -57,10 +56,10 @@ public abstract class AbstractJointPanel implements IListAdder, IComponentsSette
     @Override
     public void setComponents() {
         setListOfComponents(labelsList,70 , 0,
-                JointLabels.LABEL_WIDTH, JointLabels.LABEL_HEIGHT);
+                JointLabel.LABEL_WIDTH, JointLabel.LABEL_HEIGHT);
 
         setListOfComponents(textComponentsList, 70, 30,
-                JointTextComponents.TEXT_COMPONENT_WIDTH, JointTextComponents.TEXT_COMPONENT_HEIGHT);
+                JointTextComponent.TEXT_COMPONENT_WIDTH, JointTextComponent.TEXT_COMPONENT_HEIGHT);
 
         labelsList.
                 forEach(label -> {

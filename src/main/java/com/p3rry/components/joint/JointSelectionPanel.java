@@ -3,11 +3,11 @@ package com.p3rry.components.joint;
 import com.p3rry.components.componentsmanagement.IComponentsAdder;
 import com.p3rry.components.componentsmanagement.IComponentsSetter;
 import com.p3rry.components.componentsmanagement.ISelfComponentSetter;
+import com.p3rry.consts.Description;
 import lombok.Getter;
 
 import javax.swing.*;
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.io.IOException;
 
 @Getter
@@ -60,31 +60,31 @@ public class JointSelectionPanel implements ISelfComponentSetter, IComponentsSet
 
         try {
             ImageIcon noBevelJointIcon = new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/images/NoBevelJointIcon.png")));
-            noBevelJointIcon.setDescription("noBevelJoint");
+            noBevelJointIcon.setDescription(Description.NO_BEVEL_JOINT.toString());
             dm.addElement(noBevelJointIcon);
 
             ImageIcon vBevelJointIcon = new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/images/VBevelJointIcon.png")));
-            vBevelJointIcon.setDescription("vBevelJoint");
+            vBevelJointIcon.setDescription(Description.V_BEVEL_JOINT.toString());
             dm.addElement(vBevelJointIcon);
 
             ImageIcon yBevelJointIcon = new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/images/YBevelJointIcon.png")));
-            yBevelJointIcon.setDescription("yBevelJoint");
+            yBevelJointIcon.setDescription(Description.Y_BEVEL_JOINT.toString());
             dm.addElement(yBevelJointIcon);
 
             ImageIcon kBevelJointIcon = new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/images/KBevelJointIcon.png")));
-            kBevelJointIcon.setDescription("kBevelJoint");
+            kBevelJointIcon.setDescription(Description.K_BEVEL_JOINT.toString());
             dm.addElement(kBevelJointIcon);
 
             ImageIcon xBevelJointIcon = new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/images/XBevelJointIcon.png")));
-            xBevelJointIcon.setDescription("xBevelJoint");
+            xBevelJointIcon.setDescription(Description.X_BEVEL_JOINT.toString());
             dm.addElement(xBevelJointIcon);
 
             ImageIcon uBevelJointIcon = new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/images/uBevelJointIcon.png")));
-            uBevelJointIcon.setDescription("uBevelJoint");
+            uBevelJointIcon.setDescription(Description.U_BEVEL_JOINT.toString());
             dm.addElement(uBevelJointIcon);
 
             ImageIcon tSingleSidedJoint = new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/images/TSingleSidedJointIcon.png")));
-            tSingleSidedJoint.setDescription("tSingleSidedJoint");
+            tSingleSidedJoint.setDescription(Description.T_SINGLE_SIDED_JOINT.toString());
             dm.addElement(tSingleSidedJoint);
 
             return dm;

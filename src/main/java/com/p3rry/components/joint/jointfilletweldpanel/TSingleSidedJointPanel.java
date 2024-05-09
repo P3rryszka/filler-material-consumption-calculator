@@ -5,14 +5,14 @@ import com.p3rry.components.joint.AbstractJointPanel;
 public class TSingleSidedJointPanel extends AbstractJointPanel {
     @Override
     public void addToList() {
-        labelsList.add(jointLabels.getThicknessLabel());
-        labelsList.add(jointLabels.getLegSizeLabel());
-        labelsList.add(jointLabels.getLengthLabel());
-        labelsList.add(jointLabels.getQualityLevelLabel());
+        labelsList.add(jointLabel.getThicknessLabel());
+        labelsList.add(jointLabel.getLegSizeLabel());
+        labelsList.add(jointLabel.getLengthLabel());
+        labelsList.add(jointLabel.getQualityLevelLabel());
 
-        textComponentsList.add(jointTextComponents.getThicknessTextField());
-        textComponentsList.add(jointTextComponents.getLegSizeTextField());
-        textComponentsList.add(jointTextComponents.getLengthTextField());
-        textComponentsList.add(jointTextComponents.getQualityLevelTextField());
+        textComponentsList.add(jointTextComponent.getThicknessTextField());
+        textComponentsList.add(jointTextComponent.getLegSizeTextField());
+        textComponentsList.add(jointTextComponent.getLengthTextField());
+        textComponentsList.add(jointTextComponent.getQualityLevelTextField());
     }
 }

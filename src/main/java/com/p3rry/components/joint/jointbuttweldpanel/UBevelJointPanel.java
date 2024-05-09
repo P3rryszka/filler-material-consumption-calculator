@@ -5,20 +5,20 @@ import com.p3rry.components.joint.AbstractJointPanel;
 public class UBevelJointPanel extends AbstractJointPanel {
     @Override
     public void addToList() {
-        labelsList.add(jointLabels.getThicknessLabel());
-        labelsList.add(jointLabels.getGapLabel());
-        labelsList.add(jointLabels.getBevelAngleLabel());
-        labelsList.add(jointLabels.getBeadLabel());
-        labelsList.add(jointLabels.getRoundingLabel());
-        labelsList.add(jointLabels.getLengthLabel());
-        labelsList.add(jointLabels.getQualityLevelLabel());
+        labelsList.add(jointLabel.getThicknessLabel());
+        labelsList.add(jointLabel.getGapLabel());
+        labelsList.add(jointLabel.getBevelAngleLabel());
+        labelsList.add(jointLabel.getBeadLabel());
+        labelsList.add(jointLabel.getRoundingLabel());
+        labelsList.add(jointLabel.getLengthLabel());
+        labelsList.add(jointLabel.getQualityLevelLabel());
 
-        textComponentsList.add(jointTextComponents.getThicknessTextField());
-        textComponentsList.add(jointTextComponents.getGapTextField());
-        textComponentsList.add(jointTextComponents.getBevelAngleTextField());
-        textComponentsList.add(jointTextComponents.getBeadTextField());
-        textComponentsList.add(jointTextComponents.getRoundingTextField());
-        textComponentsList.add(jointTextComponents.getLengthTextField());
-        textComponentsList.add(jointTextComponents.getQualityLevelTextField());
+        textComponentsList.add(jointTextComponent.getThicknessTextField());
+        textComponentsList.add(jointTextComponent.getGapTextField());
+        textComponentsList.add(jointTextComponent.getBevelAngleTextField());
+        textComponentsList.add(jointTextComponent.getBeadTextField());
+        textComponentsList.add(jointTextComponent.getRoundingTextField());
+        textComponentsList.add(jointTextComponent.getLengthTextField());
+        textComponentsList.add(jointTextComponent.getQualityLevelTextField());
     }
 }
