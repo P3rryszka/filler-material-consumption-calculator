@@ -2,11 +2,12 @@ package com.p3rry.calculations.calculationsmanagement;
 
 import com.p3rry.consts.Properties;
 import com.p3rry.consts.QualityLevel;
+import lombok.NonNull;
 
 @FunctionalInterface
 public interface IWeldFaceOperations {
     double calculateWeldFaceWidth(double grooveWidth);
-    default double calculateWeldFaceHeight(QualityLevel qualityLevel, double thickness, double weldFaceWidth) {
+    default double calculateWeldFaceHeight(@NonNull QualityLevel qualityLevel, double thickness, double weldFaceWidth) {
         if(thickness >= 0.5 && qualityLevel == QualityLevel.B)
             return (1 + (0.1 * weldFaceWidth));
         else if(thickness >= 0.5 && qualityLevel == QualityLevel.C)

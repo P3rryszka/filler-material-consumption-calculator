@@ -2,7 +2,7 @@ package com.p3rry.components.weldingmethod;
 
 import lombok.NonNull;
 
-public class WeldingMethodFactory {
+public class WeldingMethodPanelFactory {
     public static AbstractWeldingMethodPanel createWeldingMethod(@NonNull String weldingMethodType) {
         if(weldingMethodType.equalsIgnoreCase("S"))
             return new SmawPanel();

@@ -2,6 +2,7 @@ package com.p3rry.calculations.calculationsmanagement;
 
 import com.p3rry.consts.Properties;
 import com.p3rry.consts.QualityLevel;
+import lombok.NonNull;
 
 public interface IRootOperations {
     default double calculateRootWidth(double gap) {
@@ -12,7 +13,7 @@ public interface IRootOperations {
         return (2.0/3.0 * rootWidth * rootHeight);
     }
 
-    default double calculateRootHeight(QualityLevel qualityLevel, double thickness, double rootWidth) {
+    default double calculateRootHeight(@NonNull QualityLevel qualityLevel, double thickness, double rootWidth) {
         if(thickness >= 0.5 && thickness < 3 && qualityLevel == QualityLevel.B)
             return (1 + (0.1 * rootWidth));
         else if(thickness >= 0.5 && thickness < 3 && qualityLevel == QualityLevel.C)

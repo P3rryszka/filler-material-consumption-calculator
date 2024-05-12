@@ -2,7 +2,11 @@ package com.p3rry.calculations.weld.buttweld;
 
 import com.p3rry.calculations.calculationsmanagement.*;
 import com.p3rry.calculations.weld.AbstractButtWeld;
+import com.p3rry.components.utlis.InputMessages;
+import com.p3rry.consts.Properties;
 import com.p3rry.consts.QualityLevel;
+
+import java.util.Optional;
 
 public class UBevelJoint extends AbstractButtWeld implements IGrooveOperations, IAngleOperations, IWeldOperations, IWeldFaceOperations, IRootOperations {
     private double bevelAngle;
@@ -13,9 +17,14 @@ public class UBevelJoint extends AbstractButtWeld implements IGrooveOperations, 
                        double gap, double bevelAngle,
                        double bead, double rounding) {
         super(thickness, qualityLevel, gap);
-        this.bevelAngle = bevelAngle;
-        this.bead = bead;
-        this.rounding = rounding;
+        this.bevelAngle = initializeBevelAngle(bevelAngle);
+        this.bevelAngle = initializeBead(bead);
+        this.rounding = Optional.of(rounding)
+                .filter(r -> r > Properties.ROUNDING_LIMIT)
+                .orElseThrow(() -> {
+                    InputMessages.displayThisParameterCannotBe(Properties.ROUNDING_LIMIT, "LE");
+                    return new IllegalArgumentException("Rounding cannot be <= " + Properties.ROUNDING_LIMIT);
+                });
     }
 
 

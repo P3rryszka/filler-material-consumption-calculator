@@ -12,17 +12,18 @@ public class ControlPanel implements ISelfComponentSetter, IComponentsAdder {
     public static final int PANEL_X_POSITION = 300;
     public static final int PANEL_Y_POSITION = 580;
     public static final int PANEL_WIDTH = 180;
-    public static final int PANEL_HEIGHT = 60;
+    public static final int PANEL_HEIGHT = 70;
 
     private JPanel panel;
     private JButton cleanButton, secondCleanButton,
-            addButton;
+            addButton, resetButton;
 
     public ControlPanel() {
         this.panel = new JPanel();
         this.addButton = new JButton("+");
         this.cleanButton = new JButton("JC");
         this.secondCleanButton = new JButton("WMC");
+        this.resetButton = new JButton("R");
 
         setSelfComponent();
         addComponents();
@@ -40,5 +41,6 @@ public class ControlPanel implements ISelfComponentSetter, IComponentsAdder {
         panel.add(cleanButton);
         panel.add(secondCleanButton);
         panel.add(addButton);
+        panel.add(resetButton);
     }
 }

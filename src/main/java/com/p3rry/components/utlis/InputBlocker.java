@@ -5,7 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class InputBlocker {
-    public JTextField numberLimitInput() {
+    public static JTextField numberLimitInput() {
         JTextField limitTextField = new JTextField();
         limitTextField.addKeyListener(new KeyAdapter() {
             @Override
@@ -21,7 +21,7 @@ public class InputBlocker {
         return limitTextField;
     }
 
-    public JTextField qualityLevelLimitInput() {
+    public static JTextField qualityLevelLimitInput() {
         JTextField limitTextField = new JTextField();
         limitTextField.addKeyListener(new KeyAdapter() {
             @Override

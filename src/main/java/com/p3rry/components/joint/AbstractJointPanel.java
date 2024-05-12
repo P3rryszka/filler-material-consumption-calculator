@@ -1,10 +1,8 @@
 package com.p3rry.components.joint;
 
-import com.p3rry.components.componentsmanagement.IComponentsAdder;
-import com.p3rry.components.componentsmanagement.IComponentsSetter;
-import com.p3rry.components.componentsmanagement.IListAdder;
-import com.p3rry.components.componentsmanagement.ISelfComponentSetter;
+import com.p3rry.components.componentsmanagement.*;
 import lombok.Getter;
+import lombok.NonNull;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
@@ -22,6 +20,8 @@ public abstract class AbstractJointPanel implements IListAdder, IComponentsSette
     protected JointLabel jointLabel;
     protected JointTextComponent jointTextComponent;
     protected List<JLabel> labelsList;
+
+    @Getter
     protected List<JTextComponent> textComponentsList;
 
     public AbstractJointPanel() {
@@ -66,5 +66,9 @@ public abstract class AbstractJointPanel implements IListAdder, IComponentsSette
             label.setVerticalAlignment(JLabel.CENTER);
             label.setHorizontalAlignment(JLabel.CENTER);
         });
+    }
+
+    public void cleanComponents() {
+        textComponentsList.forEach(textComponent -> textComponent.setText(""));
     }
 }

@@ -4,9 +4,9 @@ import com.p3rry.components.componentsmanagement.IComponentsAdder;
 import com.p3rry.components.componentsmanagement.IComponentsSetter;
 import com.p3rry.components.componentsmanagement.ISelfComponentSetter;
 import lombok.Getter;
+import lombok.NonNull;
 
 import javax.swing.*;
-import java.awt.*;
 
 public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter, IComponentsAdder, IComponentsSetter {
     public static final int PANEL_X_POSITION = 300;
@@ -17,6 +17,7 @@ public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter
     @Getter
     protected JPanel panel;
     protected WeldingMethodLabels weldingMethodLabels;
+    @Getter
     protected WeldingMethodTextComponents weldingMethodTextComponents;
 
     public AbstractWeldingMethodPanel() {
@@ -34,5 +35,16 @@ public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter
         panel.setLayout(null);
         panel.setBounds(PANEL_X_POSITION, PANEL_Y_POSITION,
                 PANEL_WIDTH, PANEL_HEIGHT);
+    }
+
+    public void cleanComponents(@NonNull String componentName) {
+        if(componentName.equalsIgnoreCase("W"))
+            weldingMethodTextComponents.getWireSpoolMassTextField().setText("");
+        else if (componentName.equalsIgnoreCase("L"))
+            weldingMethodTextComponents.getElectrodeLengthTextField().setText("");
+        else if (componentName.equalsIgnoreCase("D"))
+            weldingMethodTextComponents.getElectrodeDiameterTextField().setText("");
+        else
+            throw new IllegalArgumentException("Invalid input!");
     }
 }

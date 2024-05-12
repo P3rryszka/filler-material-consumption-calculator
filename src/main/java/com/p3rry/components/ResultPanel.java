@@ -14,13 +14,14 @@ public class ResultPanel implements ISelfComponentSetter, IComponentsAdder, ICom
     public static final int PANEL_Y_POSITION = 530;
     public static final int PANEL_WIDTH = 180;
     public static final int PANEL_HEIGHT = 50;
+    private static final String INITIAL_VALUE = "0";
 
     private JPanel panel;
-    private JTextField resultTextField;
+    private JTextArea resultTextField;
 
     public ResultPanel() {
         this.panel = new JPanel();
-        this.resultTextField = new JTextField();
+        this.resultTextField = new JTextArea();
 
         setSelfComponent();
         addComponents();
@@ -42,5 +43,8 @@ public class ResultPanel implements ISelfComponentSetter, IComponentsAdder, ICom
     @Override
     public void setComponents() {
         resultTextField.setPreferredSize(new Dimension(160,30));
+        resultTextField.setEditable(false);
+        resultTextField.setText(INITIAL_VALUE);
+        resultTextField.setFocusable(false);
     }
 }
