@@ -129,62 +129,18 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         double mass = 0;
         double additionalMaterial = 0;
         
-        if(e.getSource() == jointSelectionPanel.getJointComboBox()) {
+        if(e.getSource() == jointSelectionPanel.getJointComboBox())
             selectJointPanel();
-        } else if(e.getSource() == weldingMethodSelectionPanel.getWeldingMethodComboBox()) {
+        else if(e.getSource() == weldingMethodSelectionPanel.getWeldingMethodComboBox())
             selectWeldingMethod();
-        } else if (e.getSource() == controlPanel.getResetButton()) {
+        else if (e.getSource() == controlPanel.getResetButton())
             resetResult();
-        } else if (e.getSource() == controlPanel.getSecondCleanButton()) {
-            if(currentWeldingMethod == null) {
-                InputMessages.displaySelectJointPanel("W");
-                System.err.println("Select welding method!");
-            } else if(currentWeldingMethod == smawPanel) {
-                currentWeldingMethod.cleanComponents("L");
-                currentWeldingMethod.cleanComponents("D");
-            } else if (currentWeldingMethod == gmawPanel) {
-                currentWeldingMethod.cleanComponents("W");
-            }
-        } else if (e.getSource() == controlPanel.getCleanButton()) {
-            if(currentPanel == null) {
-                InputMessages.displaySelectJointPanel("J");
-                System.err.println("Select joint panel!");
-            } else {
-                currentPanel.cleanComponents();
-            }
-        } else if(e.getSource() == controlPanel.getAddButton()) {
-            if((currentPanel == null && currentWeldingMethod == null) ||
-                    (currentPanel == null || currentWeldingMethod == null)) {
-                InputMessages.displaySelectJointPanel("P");
-                System.err.println("Select panels!");
-            } else {
-                System.out.println(count);
-
-                if(currentPanel == noBevelJointPanel)
-                    mass = MassCalculator.calculateNoBevelJointMass(currentPanel, Properties.STEEL_DENSITY_KG_MM3);
-                else if (currentPanel == vBevelJointPanel)
-                    mass = MassCalculator.calculateVBevelJointMass(currentPanel, Properties.STEEL_DENSITY_KG_MM3);
-                else if (currentPanel == yBevelJointPanel)
-                    mass = MassCalculator.calculateYBevelJoint(currentPanel, Properties.STEEL_DENSITY_KG_MM3);
-                else if (currentPanel == xBevelJointPanel)
-                    mass = MassCalculator.calculateXBevelJoint(currentPanel, Properties.STEEL_DENSITY_KG_MM3);
-                else if (currentPanel == kBevelJointPanel)
-                    mass = MassCalculator.calculateKBevelJoint(currentPanel, Properties.STEEL_DENSITY_KG_MM3);
-                else if (currentPanel == uBevelJointPanel)
-                    mass = MassCalculator.calculateUBevelJoint(currentPanel, Properties.STEEL_DENSITY_KG_MM3);
-                else if (currentPanel == tSingleSidedJointPanel)
-                    mass = MassCalculator.calculateTSingleSidedJoint(currentPanel, Properties.STEEL_DENSITY_KG_MM3);
-
-                if(currentWeldingMethod == gmawPanel)
-                    additionalMaterial = AdditionalMaterialCalculator.calculateGmawAdditionalMaterial(currentWeldingMethod, mass);
-                else if (currentWeldingMethod == smawPanel)
-                    additionalMaterial = AdditionalMaterialCalculator.calculateSmawAdditionalMaterial(currentWeldingMethod, mass);
-
-                count += additionalMaterial;
-                resultPanel.getResultTextField().setText(String.valueOf((int) count + 1));
-                System.out.println(count);
-            }
-        }
+        else if (e.getSource() == controlPanel.getSecondCleanButton())
+            handleSecondCleanButton();
+        else if (e.getSource() == controlPanel.getCleanButton())
+           handleCleanButton();
+        else if(e.getSource() == controlPanel.getAddButton())
+            handleAddButton(mass, additionalMaterial);
     }
 
     private void selectJointPanel() {
@@ -228,6 +184,74 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         switch (selectedWeldingMethodType) {
             case SMAW -> setCurrentWeldingMethod(smawPanel);
             case GMAW -> setCurrentWeldingMethod(gmawPanel);
+        }
+    }
+
+    private void handleCleanButton() {
+        if(currentPanel == null) {
+            InputMessages.displaySelectPanel("J");
+            System.err.println("Select joint panel!");
+        } else {
+            currentPanel.cleanComponents();
+        }
+    }
+
+    private void handleSecondCleanButton() {
+        if(currentWeldingMethod == null) {
+            InputMessages.displaySelectPanel("W");
+            System.err.println("Select welding method!");
+        } else if(currentWeldingMethod == smawPanel) {
+            smawPanel.cleanComponents("L");
+            smawPanel.cleanComponents("D");
+        } else if (currentWeldingMethod == gmawPanel) {
+            gmawPanel.cleanComponents("W");
+        }
+    }
+
+    private void handleAddButton(double mass, double additionalMaterial) {
+        if((currentPanel == null && currentWeldingMethod == null) ||
+                (currentPanel == null || currentWeldingMethod == null)) {
+            InputMessages.displaySelectPanel("P");
+            System.err.println("Select panels!");
+        } else {
+            if(currentPanel.checkIfComponentsAreEmpty()) {
+                InputMessages.displayEmptyParam();
+                System.err.println("Make sure a parameter is provided within selected joint panel!");
+            } else {
+                if (currentPanel == noBevelJointPanel)
+                    mass = MassCalculator.calculateNoBevelJointMass(noBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
+                else if (currentPanel == vBevelJointPanel)
+                    mass = MassCalculator.calculateVBevelJointMass(vBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
+                else if (currentPanel == yBevelJointPanel)
+                    mass = MassCalculator.calculateYBevelJoint(yBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
+                else if (currentPanel == xBevelJointPanel)
+                    mass = MassCalculator.calculateXBevelJoint(xBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
+                else if (currentPanel == kBevelJointPanel)
+                    mass = MassCalculator.calculateKBevelJoint(kBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
+                else if (currentPanel == uBevelJointPanel)
+                    mass = MassCalculator.calculateUBevelJoint(uBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
+                else if (currentPanel == tSingleSidedJointPanel)
+                    mass = MassCalculator.calculateTSingleSidedJoint(tSingleSidedJointPanel, Properties.STEEL_DENSITY_KG_MM3);
+
+                if (currentWeldingMethod == gmawPanel) {
+                    if (gmawPanel.checkIfComponentsAreEmpty("W")) {
+                        InputMessages.displayEmptyParam();
+                        System.err.println("Make sure a parameter is provided within selected welding method panel!");
+                    } else {
+                        additionalMaterial = AdditionalMaterialCalculator.calculateGmawAdditionalMaterial(currentWeldingMethod, mass);
+                    }
+                } else if (currentWeldingMethod == smawPanel) {
+                    if (smawPanel.checkIfComponentsAreEmpty("L") || smawPanel.checkIfComponentsAreEmpty("D")) {
+                        InputMessages.displayEmptyParam();
+                        System.err.println("Make sure a parameter is provided within selected welding method panel!");
+                    } else {
+                        additionalMaterial = AdditionalMaterialCalculator.calculateSmawAdditionalMaterial(currentWeldingMethod, mass);
+                    }
+                }
+
+                count += additionalMaterial;
+                resultPanel.getResultTextField().setText(String.valueOf((int) count + 1));
+            }
         }
     }
     

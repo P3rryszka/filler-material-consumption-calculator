@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NonNull;
 
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter, IComponentsAdder, IComponentsSetter {
     public static final int PANEL_X_POSITION = 300;
@@ -17,13 +20,18 @@ public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter
     @Getter
     protected JPanel panel;
     protected WeldingMethodLabels weldingMethodLabels;
+
     @Getter
     protected WeldingMethodTextComponents weldingMethodTextComponents;
+    protected List<JLabel> labelsList;
+    protected List<JTextComponent> textComponentsList;
 
     public AbstractWeldingMethodPanel() {
         this.panel = new JPanel();
         this.weldingMethodLabels = new WeldingMethodLabels();
         this.weldingMethodTextComponents = new WeldingMethodTextComponents();
+        this.labelsList = new ArrayList<>();
+        this.textComponentsList = new ArrayList<>();
 
         setSelfComponent();
         setComponents();
@@ -44,6 +52,17 @@ public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter
             weldingMethodTextComponents.getElectrodeLengthTextField().setText("");
         else if (componentName.equalsIgnoreCase("D"))
             weldingMethodTextComponents.getElectrodeDiameterTextField().setText("");
+        else
+            throw new IllegalArgumentException("Invalid input!");
+    }
+
+    public boolean checkIfComponentsAreEmpty(@NonNull String componentName) {
+        if(componentName.equalsIgnoreCase("W"))
+            return weldingMethodTextComponents.getWireSpoolMassTextField().getText().isEmpty();
+        else if (componentName.equalsIgnoreCase("L"))
+            return weldingMethodTextComponents.getElectrodeLengthTextField().getText().isEmpty();
+        else if (componentName.equalsIgnoreCase("D"))
+            return weldingMethodTextComponents.getElectrodeDiameterTextField().getText().isEmpty();
         else
             throw new IllegalArgumentException("Invalid input!");
     }

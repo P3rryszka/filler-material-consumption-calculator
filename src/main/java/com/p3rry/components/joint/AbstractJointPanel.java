@@ -71,4 +71,9 @@ public abstract class AbstractJointPanel implements IListAdder, IComponentsSette
     public void cleanComponents() {
         textComponentsList.forEach(textComponent -> textComponent.setText(""));
     }
+
+    public boolean checkIfComponentsAreEmpty() {
+        return textComponentsList.stream()
+                .anyMatch(textComponent -> textComponent.getText().isEmpty());
+    }
 }

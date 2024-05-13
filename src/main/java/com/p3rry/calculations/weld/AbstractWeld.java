@@ -14,7 +14,7 @@ public abstract class AbstractWeld {
         this.thickness = Optional.of(thickness)
                 .filter(t -> t >= Properties.THICKNESS_LIMIT)
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParameterCannotBe(Properties.THICKNESS_LIMIT, "L");
+                    InputMessages.displayThisParamCannotBe(Properties.THICKNESS_LIMIT, "L");
                     return new IllegalArgumentException("Thickness cannot be < " + Properties.THICKNESS_LIMIT);
                 });
 
@@ -22,7 +22,7 @@ public abstract class AbstractWeld {
                 .filter(ql -> ql.equals(QualityLevel.B) || ql.equals(QualityLevel.C) ||
                         ql.equals(QualityLevel.D))
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParameterCannotBe(QualityLevel.B, QualityLevel.C, QualityLevel.D);
+                    InputMessages.displayThisParamCannotBe(QualityLevel.B, QualityLevel.C, QualityLevel.D);
                     return new IllegalArgumentException("Quality level can be: " + QualityLevel.B + " " + QualityLevel.C +
                             " " + QualityLevel.D);
                 });

@@ -16,7 +16,7 @@ public abstract class AbstractButtWeld extends AbstractWeld implements IWeldFace
         this.gap = Optional.of(gap)
                 .filter(g -> g > Properties.GAP_LIMIT)
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParameterCannotBe(Properties.GAP_LIMIT, "LE");
+                    InputMessages.displayThisParamCannotBe(Properties.GAP_LIMIT, "LE");
                     return new IllegalArgumentException("Gap cannot be <= " + Properties.GAP_LIMIT);
                 });
     }
@@ -30,7 +30,7 @@ public abstract class AbstractButtWeld extends AbstractWeld implements IWeldFace
         return Optional.of(bead)
                 .filter(b -> b > Properties.BEAD_LIMIT)
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParameterCannotBe(Properties.BEAD_LIMIT, "LE");
+                    InputMessages.displayThisParamCannotBe(Properties.BEAD_LIMIT, "LE");
                     return new IllegalArgumentException("Bead cannot be <= " + Properties.BEAD_LIMIT);
                 });
     }
@@ -39,7 +39,7 @@ public abstract class AbstractButtWeld extends AbstractWeld implements IWeldFace
         return Optional.of(bevelAngle)
                 .filter(ba -> ba >= Properties.BOTTOM_BEVEL_ANGLE_LIMIT && ba <= Properties.UPPER_BEVEL_ANGLE_LIMIT)
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParameterCannotBe(Properties.BOTTOM_BEVEL_ANGLE_LIMIT, Properties.UPPER_BEVEL_ANGLE_LIMIT);
+                    InputMessages.displayThisParamCannotBe(Properties.BOTTOM_BEVEL_ANGLE_LIMIT, Properties.UPPER_BEVEL_ANGLE_LIMIT);
                     return new IllegalArgumentException("Bevel angle cannot be < " + Properties.BOTTOM_BEVEL_ANGLE_LIMIT +
                             " and > " + Properties.UPPER_BEVEL_ANGLE_LIMIT);
                 });

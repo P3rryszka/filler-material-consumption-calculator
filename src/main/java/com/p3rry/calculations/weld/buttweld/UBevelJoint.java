@@ -22,7 +22,7 @@ public class UBevelJoint extends AbstractButtWeld implements IGrooveOperations, 
         this.rounding = Optional.of(rounding)
                 .filter(r -> r > Properties.ROUNDING_LIMIT)
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParameterCannotBe(Properties.ROUNDING_LIMIT, "LE");
+                    InputMessages.displayThisParamCannotBe(Properties.ROUNDING_LIMIT, "LE");
                     return new IllegalArgumentException("Rounding cannot be <= " + Properties.ROUNDING_LIMIT);
                 });
     }
