@@ -7,12 +7,12 @@ import com.p3rry.utlis.InputMessages;
 import java.util.Optional;
 
 public class GmawAdditionalMaterial implements IAdditionalMaterialOperations {
-    public static final double EFFECTIVITY_WIRE_SPOOL_MASS_FACTOR = 0.986;
+    public static final double EFFECTIVE_WIRE_SPOOL_MASS_FACTOR = 0.986;
 
     private double effectiveWireSpoolMass;
 
     public GmawAdditionalMaterial(double wireSpoolMass) {
-        this.effectiveWireSpoolMass = Optional.of(wireSpoolMass * EFFECTIVITY_WIRE_SPOOL_MASS_FACTOR)
+        this.effectiveWireSpoolMass = Optional.of(wireSpoolMass * EFFECTIVE_WIRE_SPOOL_MASS_FACTOR)
                 .filter(wsm -> wsm > Properties.WIRE_SPOOL_MASS_LIMIT)
                 .orElseThrow(() -> {
                     InputMessages.displayThisParamCannotBe(Properties.WIRE_SPOOL_MASS_LIMIT, "LE");

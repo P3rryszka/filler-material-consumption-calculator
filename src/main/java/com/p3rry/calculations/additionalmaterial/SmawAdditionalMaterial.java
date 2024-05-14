@@ -7,14 +7,14 @@ import com.p3rry.utlis.InputMessages;
 import java.util.Optional;
 
 public class SmawAdditionalMaterial implements IAdditionalMaterialOperations {
-    public static final double EFFECTIVITY_ELECTRODE_LENGTH_FACTOR = 0.875;
+    public static final double EFFECTIVE_ELECTRODE_LENGTH_FACTOR = 0.875;
 
     private double effectiveElectrodeLength;
     private double electrodeDiameter;
 
 
     public SmawAdditionalMaterial(double electrodeLength, double electrodeDiameter) {
-        this.effectiveElectrodeLength = Optional.of(electrodeLength * EFFECTIVITY_ELECTRODE_LENGTH_FACTOR)
+        this.effectiveElectrodeLength = Optional.of(electrodeLength * EFFECTIVE_ELECTRODE_LENGTH_FACTOR)
                 .filter(el -> el > Properties.ELECTRODE_LENGTH_LIMIT)
                 .orElseThrow(() -> {
                     InputMessages.displayThisParamCannotBe(Properties.ELECTRODE_LENGTH_LIMIT, "LE");
