@@ -7,14 +7,14 @@ import com.p3rry.consts.QualityLevel;
 import lombok.NonNull;
 
 public class JointFactory {
-    private static final String message = "Invalid joint type or amount of parameters!";
+    private static final String MESSAGE = "Invalid joint type or amount of passed parameters!";
 
     public static IWeldOperations createButtWeldJoint(@NonNull String jointType, double thickness,
                                                       @NonNull QualityLevel qualityLevel, double gap) {
         if(jointType.equalsIgnoreCase("N"))
             return new NoBevelJoint(thickness, qualityLevel, gap);
         else
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(MESSAGE);
     }
 
     public static IWeldOperations createButtWeldJoint(@NonNull String jointType, double thickness,
@@ -23,7 +23,7 @@ public class JointFactory {
         if(jointType.equalsIgnoreCase("V"))
             return new VBevelJoint(thickness, qualityLevel, gap, bevelAngle);
         else
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(MESSAGE);
     }
 
     public static IWeldOperations createButtWeldJoint(@NonNull String jointType, double thickness,
@@ -36,7 +36,7 @@ public class JointFactory {
         else if (jointType.equalsIgnoreCase("K"))
             return new KBevelJoint(thickness, qualityLevel, gap, bevelAngle, bead);
         else
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(MESSAGE);
     }
 
     public static IWeldOperations createButtWeldJoint(@NonNull String jointType, double thickness,
@@ -46,7 +46,7 @@ public class JointFactory {
         if(jointType.equalsIgnoreCase("U"))
             return new UBevelJoint(thickness, qualityLevel, gap, bevelAngle, bead, rounding);
         else
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(MESSAGE);
     }
 
     public static IWeldOperations createFilletWeldJoint(@NonNull String jointType, double thickness,
@@ -54,6 +54,6 @@ public class JointFactory {
         if(jointType.equalsIgnoreCase("T"))
             return new TSingleSidedJoint(thickness, qualityLevel, legSize);
         else
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(MESSAGE);
     }
 }

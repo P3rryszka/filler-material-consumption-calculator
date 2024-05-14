@@ -1,6 +1,6 @@
 package com.p3rry.calculations.weld;
 import com.p3rry.calculations.calculationsmanagement.IWeldFaceOperations;
-import com.p3rry.components.utlis.InputMessages;
+import com.p3rry.utlis.InputMessages;
 import com.p3rry.consts.Properties;
 import com.p3rry.consts.QualityLevel;
 

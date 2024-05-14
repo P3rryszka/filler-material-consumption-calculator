@@ -1,4 +1,4 @@
-package com.p3rry.components.utlis;
+package com.p3rry.utlis;
 
 import com.p3rry.components.joint.AbstractJointPanel;
 import com.p3rry.components.weldingmethod.AbstractWeldingMethodPanel;

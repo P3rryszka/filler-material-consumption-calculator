@@ -1,4 +1,4 @@
-package com.p3rry.components.utlis;
+package com.p3rry.utlis;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;

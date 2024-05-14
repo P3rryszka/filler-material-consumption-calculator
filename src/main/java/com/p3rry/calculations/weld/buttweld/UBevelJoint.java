@@ -2,7 +2,7 @@ package com.p3rry.calculations.weld.buttweld;
 
 import com.p3rry.calculations.calculationsmanagement.*;
 import com.p3rry.calculations.weld.AbstractButtWeld;
-import com.p3rry.components.utlis.InputMessages;
+import com.p3rry.utlis.InputMessages;
 import com.p3rry.consts.Properties;
 import com.p3rry.consts.QualityLevel;
 
@@ -18,7 +18,7 @@ public class UBevelJoint extends AbstractButtWeld implements IGrooveOperations, 
                        double bead, double rounding) {
         super(thickness, qualityLevel, gap);
         this.bevelAngle = initializeBevelAngle(bevelAngle);
-        this.bevelAngle = initializeBead(bead);
+        this.bead = initializeBead(bead);
         this.rounding = Optional.of(rounding)
                 .filter(r -> r > Properties.ROUNDING_LIMIT)
                 .orElseThrow(() -> {

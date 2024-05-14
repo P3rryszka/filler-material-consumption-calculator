@@ -1,6 +1,6 @@
 package com.p3rry.components.joint;
 
-import com.p3rry.components.utlis.InputBlocker;
+import com.p3rry.utlis.InputBlocker;
 import lombok.Getter;
 
 import javax.swing.*;

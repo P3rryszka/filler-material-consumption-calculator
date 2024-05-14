@@ -19,6 +19,7 @@ public class Properties {
     public static final double DEPOSITED_METAL_YIELD = 1.05;
     public static final double WELD_SPATTER_FACTOR = 1.01;
     public static final double DESTROY_FACTOR = 1.01;
+    public static final double CUT_FACTOR = 1.03;
 
     public static final double STEEL_DENSITY_KG_MM3 = 0.00000785;
 }

@@ -21,6 +21,6 @@ public class JointPanelFactory {
             else if (jointType.equalsIgnoreCase("T"))
                 return new TSingleSidedJointPanel();
             else
-                throw new IllegalArgumentException("Invalid joint type");
+                throw new IllegalArgumentException("Invalid joint type!");
     }
 }

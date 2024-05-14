@@ -16,6 +16,7 @@ public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter
     public static final int PANEL_Y_POSITION = 140;
     public static final int PANEL_WIDTH = 180;
     public static final int PANEL_HEIGHT = 400;
+    private static final String MESSAGE = "Invalid welding method parameters!";
 
     @Getter
     protected JPanel panel;
@@ -53,7 +54,7 @@ public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter
         else if (componentName.equalsIgnoreCase("D"))
             weldingMethodTextComponents.getElectrodeDiameterTextField().setText("");
         else
-            throw new IllegalArgumentException("Invalid input!");
+            throw new IllegalArgumentException(MESSAGE);
     }
 
     public boolean checkIfComponentsAreEmpty(@NonNull String componentName) {
@@ -64,6 +65,6 @@ public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter
         else if (componentName.equalsIgnoreCase("D"))
             return weldingMethodTextComponents.getElectrodeDiameterTextField().getText().isEmpty();
         else
-            throw new IllegalArgumentException("Invalid input!");
+            throw new IllegalArgumentException(MESSAGE);
     }
 }

@@ -2,7 +2,6 @@ package com.p3rry.components.joint;
 
 import com.p3rry.components.componentsmanagement.*;
 import lombok.Getter;
-import lombok.NonNull;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;

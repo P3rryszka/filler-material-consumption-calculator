@@ -1,6 +1,5 @@
 package com.p3rry.components.componentsmanagement;
 
-import com.p3rry.components.weldingmethod.AbstractWeldingMethodPanel;
 import lombok.NonNull;
 
 import javax.swing.*;

@@ -4,13 +4,13 @@ import com.p3rry.calculations.calculationsmanagement.IAdditionalMaterialOperatio
 import lombok.NonNull;
 
 public class WeldingMethodFactory {
-    private static final String message = "Invalid welding method type or amount of parameters!";
+    private static final String MESSAGE = "Invalid welding method type or amount of passed parameters!";
     
     public static IAdditionalMaterialOperations createWeldingMethod(@NonNull String jointType, double wireSpoolMass) {
         if(jointType.equalsIgnoreCase("G"))
             return new GmawAdditionalMaterial(wireSpoolMass);
         else 
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(MESSAGE);
     }
     
     public static IAdditionalMaterialOperations createWeldingMethod(@NonNull String jointType, double electrodeLength,
@@ -18,6 +18,6 @@ public class WeldingMethodFactory {
         if(jointType.equalsIgnoreCase("S"))
             return new SmawAdditionalMaterial(electrodeLength, electrodeDiameter);
         else
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(MESSAGE);
     }
 }

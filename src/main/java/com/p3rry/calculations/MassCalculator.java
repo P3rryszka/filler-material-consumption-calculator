@@ -3,7 +3,7 @@ package com.p3rry.calculations;
 import com.p3rry.calculations.weld.JointFactory;
 import com.p3rry.calculations.weld.Mass;
 import com.p3rry.components.joint.AbstractJointPanel;
-import com.p3rry.components.utlis.InputParser;
+import com.p3rry.utlis.InputParser;
 import com.p3rry.consts.QualityLevel;
 import lombok.NonNull;
 

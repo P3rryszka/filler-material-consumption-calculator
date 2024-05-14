@@ -1,7 +1,7 @@
 package com.p3rry.calculations.weld;
 
 import com.p3rry.calculations.calculationsmanagement.IWeldOperations;
-import com.p3rry.components.utlis.InputMessages;
+import com.p3rry.utlis.InputMessages;
 import com.p3rry.consts.Properties;
 import lombok.NonNull;
 
