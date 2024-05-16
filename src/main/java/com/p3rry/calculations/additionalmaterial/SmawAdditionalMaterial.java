@@ -11,9 +11,11 @@ public class SmawAdditionalMaterial implements IAdditionalMaterialOperations {
 
     private double effectiveElectrodeLength;
     private double electrodeDiameter;
+    private double density;
 
 
-    public SmawAdditionalMaterial(double electrodeLength, double electrodeDiameter) {
+    public SmawAdditionalMaterial(double electrodeLength, double electrodeDiameter,
+                                  double density) {
         this.effectiveElectrodeLength = Optional.of(electrodeLength * EFFECTIVE_ELECTRODE_LENGTH_FACTOR)
                 .filter(el -> el > Properties.ELECTRODE_LENGTH_LIMIT)
                 .orElseThrow(() -> {
@@ -29,13 +31,20 @@ public class SmawAdditionalMaterial implements IAdditionalMaterialOperations {
                     return new IllegalArgumentException("Electrode diameter cannot be <= " +
                            Properties.ELECTRODE_DIAMETER_LIMIT);
                 });
+
+        this.density = Optional.of(density)
+                .filter(d -> d > Properties.DENSITY_LIMIT)
+                .orElseThrow(() -> {
+                    InputMessages.displayThisParamCannotBe(Properties.DENSITY_LIMIT, "LE");
+                    return new IllegalArgumentException("Density cannot be <= " +
+                            Properties.DENSITY_LIMIT);
+                });
     }
 
     @Override
     public double calculateNeededAdditionalMaterial(double jointMass) {
-        return jointMass / ((Properties.STEEL_DENSITY_KG_MM3 * Math.PI *
-                Math.pow((electrodeDiameter/2.0), 2.0) * effectiveElectrodeLength) *
-                Properties.DEPOSITED_METAL_YIELD * Properties.WELD_SPATTER_FACTOR) *
-                Properties.DESTROY_FACTOR;
+        return jointMass / (calculateCylinderVolume(density, electrodeDiameter, effectiveElectrodeLength) *
+                Properties.DEPOSITED_METAL_YIELD * Properties.WELD_SPATTER_FACTOR *
+                Properties.DESTROY_FACTOR);
     }
 }

@@ -29,6 +29,7 @@ import java.util.Objects;
 public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSetter, IListAdder, IListeningAdder, ActionListener {
     public static final int FRAME_WIDTH = 495;
     public static final int FRAME_HEIGHT = 690;
+    private static final String MESSAGE = "Make sure a parameter is provided within selected welding method panel!";
     private double count;
 
     private JointSelectionPanel jointSelectionPanel;
@@ -48,6 +49,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
 
     private AbstractWeldingMethodPanel smawPanel;
     private AbstractWeldingMethodPanel gmawPanel;
+    private AbstractWeldingMethodPanel gtawPanel;
     private AbstractWeldingMethodPanel currentWeldingMethod;
 
     private ControlPanel controlPanel;
@@ -69,6 +71,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         this.weldingMethodPanels = new ArrayList<>();
         this.smawPanel = WeldingMethodPanelFactory.createWeldingMethod("S");
         this.gmawPanel = WeldingMethodPanelFactory.createWeldingMethod("G");
+        this.gtawPanel = WeldingMethodPanelFactory.createWeldingMethod("GT");
 
         this.controlPanel = new ControlPanel();
         this.resultPanel = new ResultPanel();
@@ -110,6 +113,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
 
         weldingMethodPanels.add(smawPanel);
         weldingMethodPanels.add(gmawPanel);
+        weldingMethodPanels.add(gtawPanel);
     }
 
     @Override
@@ -184,6 +188,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         switch (selectedWeldingMethodType) {
             case SMAW -> setCurrentWeldingMethod(smawPanel);
             case GMAW -> setCurrentWeldingMethod(gmawPanel);
+            case GTAW -> setCurrentWeldingMethod(gtawPanel);
         }
     }
 
@@ -205,6 +210,9 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
             smawPanel.cleanComponents("D");
         } else if (currentWeldingMethod == gmawPanel) {
             gmawPanel.cleanComponents("W");
+        } else if (currentWeldingMethod == gtawPanel) {
+            gtawPanel.cleanComponents("RL");
+            gtawPanel.cleanComponents("RD");
         }
     }
 
@@ -235,19 +243,28 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
 
                 if (currentWeldingMethod == gmawPanel) {
                     if (gmawPanel.checkIfComponentsAreEmpty("W")) {
-                        System.err.println("Make sure a parameter is provided within selected welding method panel!");
+                        System.err.println(MESSAGE);
                         InputMessages.displayEmptyParam();
                     } else {
-                        additionalMaterial = AdditionalMaterialCalculator.calculateGmawAdditionalMaterial(currentWeldingMethod, mass);
+                        additionalMaterial = AdditionalMaterialCalculator.calculateGmawAdditionalMaterial(gmawPanel, mass);
                         count += additionalMaterial;
                         resultPanel.getResultTextField().setText(String.valueOf((int) count + 1));
                     }
                 } else if (currentWeldingMethod == smawPanel) {
                     if (smawPanel.checkIfComponentsAreEmpty("L") || smawPanel.checkIfComponentsAreEmpty("D")) {
-                        System.err.println("Make sure a parameter is provided within selected welding method panel!");
+                        System.err.println(MESSAGE);
                         InputMessages.displayEmptyParam();
                     } else {
-                        additionalMaterial = AdditionalMaterialCalculator.calculateSmawAdditionalMaterial(currentWeldingMethod, mass);
+                        additionalMaterial = AdditionalMaterialCalculator.calculateSmawAdditionalMaterial(smawPanel, mass, Properties.STEEL_DENSITY_KG_MM3);
+                        count += additionalMaterial;
+                        resultPanel.getResultTextField().setText(String.valueOf((int) count + 1));
+                    }
+                } else if (currentWeldingMethod == gtawPanel) {
+                    if(gtawPanel.checkIfComponentsAreEmpty("RL") || gtawPanel.checkIfComponentsAreEmpty("RD")) {
+                        System.err.println(MESSAGE);
+                        InputMessages.displayEmptyParam();
+                    } else {
+                        additionalMaterial = AdditionalMaterialCalculator.calculateGtawAdditionalMaterial(gtawPanel, mass, Properties.STEEL_DENSITY_KG_MM3);
                         count += additionalMaterial;
                         resultPanel.getResultTextField().setText(String.valueOf((int) count + 1));
                     }

@@ -13,10 +13,12 @@ public class WeldingMethodFactory {
             throw new IllegalArgumentException(MESSAGE);
     }
     
-    public static IAdditionalMaterialOperations createWeldingMethod(@NonNull String jointType, double electrodeLength,
-                                                                    double electrodeDiameter) {
+    public static IAdditionalMaterialOperations createWeldingMethod(@NonNull String jointType, double length,
+                                                                    double diameter, double density) {
         if(jointType.equalsIgnoreCase("S"))
-            return new SmawAdditionalMaterial(electrodeLength, electrodeDiameter);
+            return new SmawAdditionalMaterial(length, diameter, density);
+        else if(jointType.equalsIgnoreCase("GT"))
+            return new GtawAdditionalMaterial(length, diameter, density);
         else
             throw new IllegalArgumentException(MESSAGE);
     }

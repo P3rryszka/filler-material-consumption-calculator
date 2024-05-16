@@ -18,15 +18,29 @@ public class AdditionalMaterialCalculator {
         }
     }
 
-    public static double calculateSmawAdditionalMaterial(@NonNull AbstractWeldingMethodPanel weldingMethodPanelType, double mass) {
+    public static double calculateSmawAdditionalMaterial(@NonNull AbstractWeldingMethodPanel weldingMethodPanelType, double mass,
+                                                         double density) {
        try {
            double electrodeLength = InputParser.parseElectrodeLengthParam(weldingMethodPanelType);
            double electrodeDiameter = InputParser.parseElectrodeDiameterParam(weldingMethodPanelType);
 
-           var weldingMethod = WeldingMethodFactory.createWeldingMethod("S", electrodeLength, electrodeDiameter);
+           var weldingMethod = WeldingMethodFactory.createWeldingMethod("S", electrodeLength, electrodeDiameter, density);
            return weldingMethod.calculateNeededAdditionalMaterial(mass);
        } catch (NumberFormatException e) {
            throw new RuntimeException(MESSAGE + e.getMessage());
        }
+    }
+
+    public static double calculateGtawAdditionalMaterial(@NonNull AbstractWeldingMethodPanel weldingMethodPanelType, double mass,
+                                                         double density) {
+        try {
+            double rodLength = InputParser.parseRodLengthParam(weldingMethodPanelType);
+            double rodDiameter = InputParser.parseRodDiameterParam(weldingMethodPanelType);
+
+            var weldingMethod = WeldingMethodFactory.createWeldingMethod("GT", rodLength, rodDiameter, density);
+            return weldingMethod.calculateNeededAdditionalMaterial(mass);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(MESSAGE + e.getMessage());
+        }
     }
 }

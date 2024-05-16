@@ -53,6 +53,10 @@ public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter
             weldingMethodTextComponents.getElectrodeLengthTextField().setText("");
         else if (componentName.equalsIgnoreCase("D"))
             weldingMethodTextComponents.getElectrodeDiameterTextField().setText("");
+        else if (componentName.equalsIgnoreCase("RL"))
+            weldingMethodTextComponents.getRodLengthTextField().setText("");
+        else if (componentName.equalsIgnoreCase("RD"))
+            weldingMethodTextComponents.getRodLengthTextField().setText("");
         else
             throw new IllegalArgumentException(MESSAGE);
     }
@@ -64,6 +68,10 @@ public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter
             return weldingMethodTextComponents.getElectrodeLengthTextField().getText().isEmpty();
         else if (componentName.equalsIgnoreCase("D"))
             return weldingMethodTextComponents.getElectrodeDiameterTextField().getText().isEmpty();
+        else if (componentName.equalsIgnoreCase("RL"))
+            return weldingMethodTextComponents.getRodLengthTextField().getText().isEmpty();
+        else if (componentName.equalsIgnoreCase("RD"))
+            return weldingMethodTextComponents.getRodDiameterTextField().getText().isEmpty();
         else
             throw new IllegalArgumentException(MESSAGE);
     }

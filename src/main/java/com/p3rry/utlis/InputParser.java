@@ -25,4 +25,12 @@ public class InputParser {
     public static double parseElectrodeDiameterParam(@NonNull AbstractWeldingMethodPanel weldingMethodPanelType) {
         return Double.parseDouble(weldingMethodPanelType.getWeldingMethodTextComponents().getElectrodeDiameterTextField().getText());
     }
+
+    public static double parseRodDiameterParam(@NonNull AbstractWeldingMethodPanel weldingMethodPanelType) {
+        return Double.parseDouble(weldingMethodPanelType.getWeldingMethodTextComponents().getRodDiameterTextField().getText());
+    }
+
+    public static double parseRodLengthParam(@NonNull AbstractWeldingMethodPanel weldingMethodPanelType) {
+        return Double.parseDouble(weldingMethodPanelType.getWeldingMethodTextComponents().getRodLengthTextField().getText());
+    }
 }

@@ -12,6 +12,10 @@ public class Properties {
     public static final double ELECTRODE_LENGTH_LIMIT = 0;
     public static final double ELECTRODE_DIAMETER_LIMIT = 0;
     public static final double WIRE_SPOOL_MASS_LIMIT = 0;
+    public static final double ROD_LENGTH_LIMIT = 0;
+    public static final double ROD_DIAMETER_LIMIT = 0;
+    public static final double DENSITY_LIMIT = 0;
+
 
     public static final double WELD_FACE_WIDTH_ALLOWANCE = 4;
     public static final double ROOT_WIDTH_ALLOWANCE = 2;
@@ -19,7 +23,7 @@ public class Properties {
     public static final double DEPOSITED_METAL_YIELD = 1.05;
     public static final double WELD_SPATTER_FACTOR = 1.01;
     public static final double DESTROY_FACTOR = 1.01;
-    public static final double CUT_FACTOR = 1.03;
+    public static final double CUT_FACTOR = 1.05;
 
     public static final double STEEL_DENSITY_KG_MM3 = 0.00000785;
 }
