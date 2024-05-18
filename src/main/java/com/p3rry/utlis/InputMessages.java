@@ -37,4 +37,8 @@ public class InputMessages {
     public static void displayEmptyParam() {
         JOptionPane.showMessageDialog(null, "Make sure every parameter is provided!", "", JOptionPane.WARNING_MESSAGE);
     }
+
+    public static void displayAllParamsAreEmpty() {
+        JOptionPane.showMessageDialog(null, "Nothing to clear! Every parameter is empty!", "", JOptionPane.INFORMATION_MESSAGE);
+    }
 }

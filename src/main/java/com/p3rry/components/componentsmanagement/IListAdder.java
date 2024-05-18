@@ -13,9 +13,14 @@ public interface IListAdder {
         textComponentList.forEach(textComponent -> textComponent.setText(""));
     }
 
-    default boolean checkIfComponentsAreEmpty(List<JTextComponent> textComponentList) {
+    default boolean checkIfAnyComponentIsEmpty(List<JTextComponent> textComponentList) {
         return textComponentList.stream()
                 .anyMatch(textComponent -> textComponent.getText().isEmpty());
+    }
+
+    default boolean checkIfAllComponentsAreEmpty(List<JTextComponent> textComponentList) {
+        return textComponentList.stream()
+                .allMatch(textComponent -> textComponent.getText().isEmpty());
     }
 
     default void manageComponents(List<JTextComponent> textComponentsList, List<JLabel> labelsList,
