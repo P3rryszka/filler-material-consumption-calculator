@@ -178,16 +178,18 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
                 setCurrentJointPanel(tSingleSidedJointPanel);
                 currentPanel = tSingleSidedJointPanel;
             }
+            default -> throw new IllegalArgumentException("Issues bevel joint panels! Invalid value of enumeration type!");
         }
     }
 
     private void selectWeldingMethod() {
-        WeldingMethodType selectedWeldingMethodType = (WeldingMethodType) weldingMethodSelectionPanel.getWeldingMethodComboBox().getSelectedItem();
+        WeldingMethodType selectedWeldingMethodType = (WeldingMethodType) Objects.requireNonNull(weldingMethodSelectionPanel.getWeldingMethodComboBox().getSelectedItem());
 
         switch (selectedWeldingMethodType) {
             case SMAW -> setCurrentWeldingMethod(smawPanel);
             case GMAW -> setCurrentWeldingMethod(gmawPanel);
             case GTAW -> setCurrentWeldingMethod(gtawPanel);
+            default -> throw new IllegalArgumentException();
         }
     }
 
