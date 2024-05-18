@@ -19,7 +19,6 @@ import com.p3rry.consts.WeldingMethodType;
 import lombok.NonNull;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicSliderUI;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -141,11 +140,11 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         else if (e.getSource() == controlPanel.getResetButton())
             resetResult();
         else if (e.getSource() == controlPanel.getSecondCleanButton())
-            handleCleaning(currentWeldingMethod, "WP", currentWeldingMethod.getTextComponentsList());
+            handleCleanButtons(currentWeldingMethod, "WP", currentWeldingMethod.getTextComponentsList());
         else if (e.getSource() == controlPanel.getCleanButton())
-            handleCleaning(currentPanel, "JP", currentPanel.getTextComponentsList());
+            handleCleanButtons(currentPanel, "JP", currentPanel.getTextComponentsList());
         else if(e.getSource() == controlPanel.getAddButton())
-            handleAddButton(mass, additionalMaterial);
+            handleAddButton();
     }
 
     private void selectJointPanel() {
@@ -195,8 +194,8 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         }
     }
 
-    private void handleCleaning(IListAdder handler, String panelName,
-                                List<JTextComponent> list) {
+    private void handleCleanButtons(IListAdder handler, String panelName,
+                                    List<JTextComponent> list) {
         if(handler == null) {
             InputMessages.displaySelectPanel(panelName);
             System.err.println("Select panel!");
@@ -210,7 +209,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         }
     }
 
-    private void handleAddButton(double mass, double additionalMaterial) {
+    private void handleAddButton() {
         if((currentPanel == null && currentWeldingMethod == null) ||
                 (currentPanel == null || currentWeldingMethod == null)) {
             System.err.println("Select panels!");
@@ -221,6 +220,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
                 System.err.println("Make sure a parameter is provided within selected joint panel or welding method panel!");
                 InputMessages.displayEmptyParam();
             } else {
+                double mass;
                 if (currentPanel == noBevelJointPanel)
                     mass = MassCalculator.calculateNoBevelJointMass(noBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
                 else if (currentPanel == vBevelJointPanel)
@@ -236,8 +236,9 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
                 else if (currentPanel == tSingleSidedJointPanel)
                     mass = MassCalculator.calculateTSingleSidedJoint(tSingleSidedJointPanel, Properties.STEEL_DENSITY_KG_MM3);
                 else
-                    throw new IllegalArgumentException("Current joint panel is invalid - null!");
+                    throw new IllegalArgumentException("Current joint panel is invalid!");
 
+                double additionalMaterial;
                 if (currentWeldingMethod == gmawPanel)
                     additionalMaterial = AdditionalMaterialCalculator.calculateGmawAdditionalMaterial(gmawPanel, mass);
                 else if (currentWeldingMethod == smawPanel)
@@ -245,7 +246,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
                 else if (currentWeldingMethod == gtawPanel)
                     additionalMaterial = AdditionalMaterialCalculator.calculateGtawAdditionalMaterial(gtawPanel, mass, Properties.STEEL_DENSITY_KG_MM3);
                 else
-                    throw new IllegalArgumentException("Current welding method panel is invalid - null!");
+                    throw new IllegalArgumentException("Current welding method panel is invalid!");
 
                 count += additionalMaterial;
                 resultPanel.getResultTextField().setText(String.valueOf((int) count + 1));
