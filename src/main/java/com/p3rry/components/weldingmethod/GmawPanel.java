@@ -2,19 +2,20 @@ package com.p3rry.components.weldingmethod;
 
 public class GmawPanel extends AbstractWeldingMethodPanel {
     @Override
-    public void addComponents() {
-        panel.add(weldingMethodLabels.getNameInfo());
-        panel.add(weldingMethodLabels.getWireSpoolMassLabel());
-        panel.add(weldingMethodTextComponents.getWireSpoolMassTextField());
+    public void addToList() {
+        labelsList.add(weldingMethodLabels.getNameInfo());
+        labelsList.add(weldingMethodLabels.getWireSpoolMassLabel());
+
+        textComponentsList.add(weldingMethodTextComponents.getWireSpoolMassTextField());
     }
 
     @Override
     public void setComponents() {
-        weldingMethodLabels.getNameInfo().setBounds(10,0,
+        labelsList.get(0).setBounds(10,0,
                 WeldingMethodLabels.LABEL_WIDTH, WeldingMethodLabels.LABEL_HEIGHT);
-        weldingMethodLabels.getWireSpoolMassLabel().setBounds(10, 30,
+        labelsList.get(1).setBounds(10, 30,
                 WeldingMethodLabels.LABEL_WIDTH, WeldingMethodLabels.LABEL_HEIGHT);
-        weldingMethodTextComponents.getWireSpoolMassTextField().setBounds(10,60,
+        textComponentsList.get(0).setBounds(10,60,
                 WeldingMethodTextComponents.TEXT_COMPONENT_WIDTH, WeldingMethodTextComponents.TEXT_COMPONENT_HEIGHT);
 
         weldingMethodLabels.getNameInfo().setText("GMAW");

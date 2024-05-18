@@ -6,27 +6,23 @@ import javax.swing.*;
 
 public class InputMessages {
     public static void displaySelectPanel(String selectionType) {
-        if (selectionType.equalsIgnoreCase("J"))
-            JOptionPane.showMessageDialog(null, "Select joint panel!", "", JOptionPane.INFORMATION_MESSAGE);
-        else if (selectionType.equalsIgnoreCase("W"))
-            JOptionPane.showMessageDialog(null, "Select welding method panel!", "", JOptionPane.INFORMATION_MESSAGE);
-        else if (selectionType.equalsIgnoreCase("P"))
-            JOptionPane.showMessageDialog(null, "Select panels!", "", JOptionPane.INFORMATION_MESSAGE);
-        else
-            throw new IllegalArgumentException("Invalid input!");
+        switch (selectionType) {
+            case ("JP") -> JOptionPane.showMessageDialog(null, "Select joint panel!", "", JOptionPane.INFORMATION_MESSAGE);
+            case ("WP") -> JOptionPane.showMessageDialog(null, "Select welding method panel!", "", JOptionPane.INFORMATION_MESSAGE);
+            case ("BP") -> JOptionPane.showMessageDialog(null, "Select panels!", "", JOptionPane.INFORMATION_MESSAGE);
+            default -> throw new IllegalArgumentException("Invalid selection type!");
+        }
     }
 
     public static void displayThisParamCannotBe(double value, String  inequalityType) {
-        if(inequalityType.equalsIgnoreCase("L"))
-            JOptionPane.showMessageDialog(null, "This parameter cannot be < " + value, "", JOptionPane.WARNING_MESSAGE);
-        else if (inequalityType.equalsIgnoreCase("LE"))
-            JOptionPane.showMessageDialog(null, "This parameter cannot be <= " + value, "", JOptionPane.WARNING_MESSAGE);
-        else if (inequalityType.equalsIgnoreCase("E"))
-            JOptionPane.showMessageDialog(null, "This parameter cannot be = " + value, "", JOptionPane.WARNING_MESSAGE);
-        else if (inequalityType.equalsIgnoreCase("G"))
-            JOptionPane.showMessageDialog(null, "This parameter cannot be > " + value, "", JOptionPane.WARNING_MESSAGE);
-        else if (inequalityType.equalsIgnoreCase("GE"))
-            JOptionPane.showMessageDialog(null, "This parameter cannot be >= " + value, "", JOptionPane.WARNING_MESSAGE);
+        switch (inequalityType) {
+            case ("<") -> JOptionPane.showMessageDialog(null, "This parameter cannot be < " + value, "", JOptionPane.WARNING_MESSAGE);
+            case ("<=") -> JOptionPane.showMessageDialog(null, "This parameter cannot be <= " + value, "", JOptionPane.WARNING_MESSAGE);
+            case ("=") -> JOptionPane.showMessageDialog(null, "This parameter cannot be = " + value, "", JOptionPane.WARNING_MESSAGE);
+            case (">") -> JOptionPane.showMessageDialog(null, "This parameter cannot be > " + value, "", JOptionPane.WARNING_MESSAGE);
+            case(">=") -> JOptionPane.showMessageDialog(null, "This parameter cannot be >= " + value, "", JOptionPane.WARNING_MESSAGE);
+            default -> throw new IllegalArgumentException("Invalid inequality type!");
+        }
     }
 
     public static void displayThisParamCannotBe(double bottomValue, double upperValue) {

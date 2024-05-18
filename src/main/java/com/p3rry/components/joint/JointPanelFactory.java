@@ -2,25 +2,34 @@ package com.p3rry.components.joint;
 
 import com.p3rry.components.joint.jointbuttweldpanel.*;
 import com.p3rry.components.joint.jointfilletweldpanel.TSingleSidedJointPanel;
+import com.p3rry.consts.Description;
 import lombok.NonNull;
 
 public class JointPanelFactory {
-    public static AbstractJointPanel createJointPanel(@NonNull String jointType) {
-            if (jointType.equalsIgnoreCase("K"))
-                return new KBevelJointPanel();
-            else if (jointType.equalsIgnoreCase("N"))
+    public static AbstractJointPanel createJointPanel(@NonNull Description jointType) {
+        switch (jointType) {
+            case NO_BEVEL_JOINT -> {
                 return new NoBevelJointPanel();
-            else if (jointType.equalsIgnoreCase("U"))
-                return new UBevelJointPanel();
-            else if (jointType.equalsIgnoreCase("V"))
+            }
+            case V_BEVEL_JOINT -> {
                 return new VBevelJointPanel();
-            else if (jointType.equalsIgnoreCase("X"))
-                return new XBevelJointPanel();
-            else if (jointType.equalsIgnoreCase("Y"))
+            }
+            case Y_BEVEL_JOINT -> {
                 return new YBevelJointPanel();
-            else if (jointType.equalsIgnoreCase("T"))
+            }
+            case K_BEVEL_JOINT -> {
+                return new KBevelJointPanel();
+            }
+            case X_BEVEL_JOINT -> {
+                return new XBevelJointPanel();
+            }
+            case U_BEVEL_JOINT -> {
+                return new UBevelJointPanel();
+            }
+            case T_SINGLE_SIDED_JOINT -> {
                 return new TSingleSidedJointPanel();
-            else
-                throw new IllegalArgumentException("Invalid joint type!");
+            }
+            default -> throw new IllegalArgumentException("Invalid input!");
+        }
     }
 }

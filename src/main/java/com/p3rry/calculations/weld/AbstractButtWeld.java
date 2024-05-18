@@ -16,7 +16,7 @@ public abstract class AbstractButtWeld extends AbstractWeld implements IWeldFace
         this.gap = Optional.of(gap)
                 .filter(g -> g > Properties.GAP_LIMIT)
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParamCannotBe(Properties.GAP_LIMIT, "LE");
+                    InputMessages.displayThisParamCannotBe(Properties.GAP_LIMIT, "<=");
                     return new IllegalArgumentException("Gap cannot be <= " + Properties.GAP_LIMIT);
                 });
     }
@@ -30,7 +30,7 @@ public abstract class AbstractButtWeld extends AbstractWeld implements IWeldFace
         return Optional.of(bead)
                 .filter(b -> b > Properties.BEAD_LIMIT)
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParamCannotBe(Properties.BEAD_LIMIT, "LE");
+                    InputMessages.displayThisParamCannotBe(Properties.BEAD_LIMIT, "<=");
                     return new IllegalArgumentException("Bead cannot be <= " + Properties.BEAD_LIMIT);
                 });
     }

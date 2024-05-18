@@ -15,7 +15,7 @@ public class Mass {
         this.length = Optional.of(length)
                 .filter(l -> l > Properties.LENGTH_LIMIT)
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParamCannotBe(Properties.LENGTH_LIMIT, "LE");
+                    InputMessages.displayThisParamCannotBe(Properties.LENGTH_LIMIT, "<=");
                     return new IllegalArgumentException("Length cannot be <= " + Properties.LENGTH_LIMIT);
                 });
         this.weldSectionArea = weldSectionArea;

@@ -14,7 +14,7 @@ public abstract class AbstractWeld {
         this.thickness = Optional.of(thickness)
                 .filter(t -> t >= Properties.THICKNESS_LIMIT)
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParamCannotBe(Properties.THICKNESS_LIMIT, "L");
+                    InputMessages.displayThisParamCannotBe(Properties.THICKNESS_LIMIT, "<");
                     return new IllegalArgumentException("Thickness cannot be < " + Properties.THICKNESS_LIMIT);
                 });
 

@@ -18,7 +18,6 @@ public class XBevelJoint extends AbstractButtWeld implements IGrooveOperations, 
         this.bead = initializeBead(bead);
     }
 
-
     @Override
     public double calculateGrooveWidth() {
         return ((thickness - bead) * convertIntoDegrees(bevelAngle, 2.0) + gap);
@@ -28,7 +27,6 @@ public class XBevelJoint extends AbstractButtWeld implements IGrooveOperations, 
     public double calculateGrooveSectionArea() {
         return (thickness * gap + (Math.pow((thickness - bead),2.0) / 2.0) * convertIntoDegrees(bevelAngle, 2.0));
     }
-
 
     @Override
     public double calculateWeldSectionArea() {

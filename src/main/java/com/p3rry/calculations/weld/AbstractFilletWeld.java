@@ -16,7 +16,7 @@ public abstract class AbstractFilletWeld extends AbstractWeld implements IWeldFa
         this.legSize = Optional.of(legSize)
                 .filter(ls -> ls > Properties.LEG_SIZE_LIMIT)
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParamCannotBe(Properties.LEG_SIZE_LIMIT, "LE");
+                    InputMessages.displayThisParamCannotBe(Properties.LEG_SIZE_LIMIT, "<=");
                     return new IllegalArgumentException("Leg size cannot be <= " + Properties.LEG_SIZE_LIMIT);
                 });
     }

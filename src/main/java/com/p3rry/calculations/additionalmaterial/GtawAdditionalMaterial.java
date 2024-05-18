@@ -17,7 +17,7 @@ public class GtawAdditionalMaterial implements IAdditionalMaterialOperations{
         this.effectiveRodLength = Optional.of(effectiveRodLength * EFFECTIVE_ROD_LENGTH)
                 .filter(rl -> rl > Properties.ROD_LENGTH_LIMIT)
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParamCannotBe(Properties.ROD_LENGTH_LIMIT, "LE");
+                    InputMessages.displayThisParamCannotBe(Properties.ROD_LENGTH_LIMIT, "<=");
                     return new IllegalArgumentException("Rod length cannot be <= " +
                             Properties.ROD_LENGTH_LIMIT);
                 });
@@ -25,7 +25,7 @@ public class GtawAdditionalMaterial implements IAdditionalMaterialOperations{
         this.rodDiameter = Optional.of(rodDiameter)
                 .filter(rd -> rd > Properties.ROD_LENGTH_LIMIT)
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParamCannotBe(Properties.ROD_DIAMETER_LIMIT, "LE");
+                    InputMessages.displayThisParamCannotBe(Properties.ROD_DIAMETER_LIMIT, "<=");
                     return new IllegalArgumentException("Rod diameter cannot be <= " +
                             Properties.ROD_DIAMETER_LIMIT);
                 });
@@ -33,7 +33,7 @@ public class GtawAdditionalMaterial implements IAdditionalMaterialOperations{
         this.density = Optional.of(density)
                 .filter(d -> d > Properties.DENSITY_LIMIT)
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParamCannotBe(Properties.DENSITY_LIMIT, "LE");
+                    InputMessages.displayThisParamCannotBe(Properties.DENSITY_LIMIT, "<=");
                     return new IllegalArgumentException("Density cannot be <= " +
                             Properties.DENSITY_LIMIT);
                 });

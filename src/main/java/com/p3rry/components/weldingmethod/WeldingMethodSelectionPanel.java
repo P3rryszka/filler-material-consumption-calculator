@@ -7,7 +7,6 @@ import com.p3rry.consts.WeldingMethodType;
 import lombok.Getter;
 
 import javax.swing.*;
-import java.awt.*;
 
 @Getter
 public class WeldingMethodSelectionPanel implements ISelfComponentSetter, IComponentsSetter, IComponentsAdder {

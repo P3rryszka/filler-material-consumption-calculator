@@ -15,7 +15,7 @@ public class GmawAdditionalMaterial implements IAdditionalMaterialOperations {
         this.effectiveWireSpoolMass = Optional.of(wireSpoolMass * EFFECTIVE_WIRE_SPOOL_MASS_FACTOR)
                 .filter(wsm -> wsm > Properties.WIRE_SPOOL_MASS_LIMIT)
                 .orElseThrow(() -> {
-                    InputMessages.displayThisParamCannotBe(Properties.WIRE_SPOOL_MASS_LIMIT, "LE");
+                    InputMessages.displayThisParamCannotBe(Properties.WIRE_SPOOL_MASS_LIMIT, "<=");
                     return new IllegalArgumentException("Wire spool mass cannot be <= " + Properties.WIRE_SPOOL_MASS_LIMIT);
                 });
     }

@@ -14,12 +14,12 @@ public abstract class AbstractJointPanel implements IListAdder, IComponentsSette
     public static final int PANEL_WIDTH = 300;
     public static final int PANEL_HEIGHT = 500;
 
-    @Getter
-    protected JPanel panel;
     protected JointLabel jointLabel;
     protected JointTextComponent jointTextComponent;
     protected List<JLabel> labelsList;
 
+    @Getter
+    protected JPanel panel;
     @Getter
     protected List<JTextComponent> textComponentsList;
 
@@ -38,11 +38,7 @@ public abstract class AbstractJointPanel implements IListAdder, IComponentsSette
 
     @Override
     public void addComponents() {
-        labelsList.
-                forEach(label -> panel.add(label));
-
-        textComponentsList.
-                forEach(textComponent -> panel.add(textComponent));
+        manageComponents(textComponentsList, labelsList, panel);
     }
 
     @Override
@@ -65,14 +61,5 @@ public abstract class AbstractJointPanel implements IListAdder, IComponentsSette
             label.setVerticalAlignment(JLabel.CENTER);
             label.setHorizontalAlignment(JLabel.CENTER);
         });
-    }
-
-    public void cleanComponents() {
-        textComponentsList.forEach(textComponent -> textComponent.setText(""));
-    }
-
-    public boolean checkIfComponentsAreEmpty() {
-        return textComponentsList.stream()
-                .anyMatch(textComponent -> textComponent.getText().isEmpty());
     }
 }
