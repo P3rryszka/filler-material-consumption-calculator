@@ -9,11 +9,11 @@ public interface IWeldFaceOperations {
     double calculateWeldFaceWidth(double grooveWidth);
 
     default double calculateWeldFaceHeight(@NonNull QualityLevel qualityLevel, double thickness, double weldFaceWidth) {
-        if(thickness >= 0.5 && qualityLevel == QualityLevel.B)
+        if(thickness >= 0.5 && qualityLevel.equals(QualityLevel.B))
             return (1 + (0.1 * weldFaceWidth));
-        else if(thickness >= 0.5 && qualityLevel == QualityLevel.C)
+        else if(thickness >= 0.5 && qualityLevel.equals(QualityLevel.C))
             return (1 + (0.15 * weldFaceWidth));
-        else if(thickness >= 0.5 && qualityLevel == QualityLevel.D)
+        else if(thickness >= 0.5 && qualityLevel.equals(QualityLevel.D))
             return (1 + (0.25 * weldFaceWidth));
         else
             throw new IllegalArgumentException("Issue with quality level value or thickness value. " +
