@@ -130,9 +130,6 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        double mass = 0;
-        double additionalMaterial = 0;
-
         if(e.getSource() == jointSelectionPanel.getJointComboBox())
             selectJointPanel();
         else if(e.getSource() == weldingMethodSelectionPanel.getWeldingMethodComboBox())
@@ -221,6 +218,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
                 InputMessages.displayEmptyParam();
             } else {
                 double mass;
+                
                 if (currentPanel == noBevelJointPanel)
                     mass = MassCalculator.calculateNoBevelJointMass(noBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
                 else if (currentPanel == vBevelJointPanel)
