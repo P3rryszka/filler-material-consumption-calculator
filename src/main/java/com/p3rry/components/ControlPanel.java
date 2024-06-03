@@ -15,14 +15,14 @@ public class ControlPanel implements ISelfComponentSetter, IComponentsAdder {
     public static final int PANEL_HEIGHT = 70;
 
     private JPanel panel;
-    private JButton cleanButton, secondCleanButton,
+    private JButton cleanJointPanelButton, cleanWeldingMethodPanelButton,
             addButton, resetButton;
 
     public ControlPanel() {
         this.panel = new JPanel();
         this.addButton = new JButton("+");
-        this.cleanButton = new JButton("JC");
-        this.secondCleanButton = new JButton("WMC");
+        this.cleanJointPanelButton = new JButton("JC");
+        this.cleanWeldingMethodPanelButton = new JButton("WMC");
         this.resetButton = new JButton("R");
 
         setSelfComponent();
@@ -38,8 +38,8 @@ public class ControlPanel implements ISelfComponentSetter, IComponentsAdder {
 
     @Override
     public void addComponents() {
-        panel.add(cleanButton);
-        panel.add(secondCleanButton);
+        panel.add(cleanJointPanelButton);
+        panel.add(cleanWeldingMethodPanelButton);
         panel.add(addButton);
         panel.add(resetButton);
     }

@@ -19,7 +19,6 @@ import com.p3rry.consts.WeldingMethodType;
 import lombok.NonNull;
 
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -95,8 +94,8 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         jointSelectionPanel.getJointComboBox().addActionListener(this);
         weldingMethodSelectionPanel.getWeldingMethodComboBox().addActionListener(this);
 
-        controlPanel.getCleanButton().addActionListener(this);
-        controlPanel.getSecondCleanButton().addActionListener(this);
+        controlPanel.getCleanJointPanelButton().addActionListener(this);
+        controlPanel.getCleanWeldingMethodPanelButton().addActionListener(this);
         controlPanel.getAddButton().addActionListener(this);
         controlPanel.getResetButton().addActionListener(this);
     }
@@ -136,10 +135,10 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
             selectWeldingMethod();
         else if (e.getSource() == controlPanel.getResetButton())
             resetResult();
-        else if (e.getSource() == controlPanel.getSecondCleanButton())
-            handleCleanButtons(currentWeldingMethod, "WP", currentWeldingMethod.getTextComponentsList());
-        else if (e.getSource() == controlPanel.getCleanButton())
-            handleCleanButtons(currentPanel, "JP", currentPanel.getTextComponentsList());
+        else if (e.getSource() == controlPanel.getCleanWeldingMethodPanelButton())
+            handleCleanWeldingMethodPanelButton();
+        else if (e.getSource() == controlPanel.getCleanJointPanelButton())
+            handleCleanJointPanelButton();
         else if(e.getSource() == controlPanel.getAddButton())
             handleAddButton();
     }
@@ -191,18 +190,29 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         }
     }
 
-    private void handleCleanButtons(IListAdder handler, String panelName,
-                                    List<JTextComponent> list) {
-        if(handler == null) {
-            InputMessages.displaySelectPanel(panelName);
-            System.err.println("Select panel!");
+    private void handleCleanWeldingMethodPanelButton() {
+        if(currentWeldingMethod == null) {
+            InputMessages.displaySelectPanel("WP");
+            System.err.println("Select welding method panel!");
         } else {
-            if(handler.checkIfAllComponentsAreEmpty(list)) {
+            if(currentWeldingMethod.checkIfAllComponentsAreEmpty(currentWeldingMethod.getTextComponentsList())) {
                 InputMessages.displayAllParamsAreEmpty();
                 System.err.println("Every parameter is empty! Nothing to clear!");
-            } else {
-                handler.cleanComponents(list);
-            }
+            } else
+                currentWeldingMethod.cleanComponents(currentWeldingMethod.getTextComponentsList());
+        }
+    }
+
+    private void handleCleanJointPanelButton() {
+        if(currentPanel == null) {
+            InputMessages.displaySelectPanel("JP");
+            System.err.println("Select joint panel!");
+        } else {
+            if(currentPanel.checkIfAllComponentsAreEmpty(currentPanel.getTextComponentsList())) {
+                InputMessages.displayAllParamsAreEmpty();
+                System.err.println("Every parameter is empty! Nothing to clear!");
+            } else
+                currentPanel.cleanComponents(currentPanel.getTextComponentsList());
         }
     }
 
@@ -218,7 +228,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
                 InputMessages.displayEmptyParam();
             } else {
                 double mass;
-                
+
                 if (currentPanel == noBevelJointPanel)
                     mass = MassCalculator.calculateNoBevelJointMass(noBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
                 else if (currentPanel == vBevelJointPanel)
