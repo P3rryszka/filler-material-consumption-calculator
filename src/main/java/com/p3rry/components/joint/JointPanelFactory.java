@@ -2,11 +2,11 @@ package com.p3rry.components.joint;
 
 import com.p3rry.components.joint.jointbuttweldpanel.*;
 import com.p3rry.components.joint.jointfilletweldpanel.TSingleSidedJointPanel;
-import com.p3rry.consts.Description;
+import com.p3rry.consts.JointType;
 import lombok.NonNull;
 
 public class JointPanelFactory {
-    public static AbstractJointPanel createJointPanel(@NonNull Description jointType) {
+    public static AbstractJointPanel createJointPanel(@NonNull JointType jointType) {
         switch (jointType) {
             case NO_BEVEL_JOINT -> {
                 return new NoBevelJointPanel();
@@ -29,7 +29,8 @@ public class JointPanelFactory {
             case T_SINGLE_SIDED_JOINT -> {
                 return new TSingleSidedJointPanel();
             }
-            default -> throw new IllegalArgumentException("Invalid input!");
+            default ->
+                    throw new IllegalArgumentException("Invalid input!");
         }
     }
 }

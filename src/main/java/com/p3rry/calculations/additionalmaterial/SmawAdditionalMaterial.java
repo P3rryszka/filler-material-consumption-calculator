@@ -7,14 +7,16 @@ import com.p3rry.utlis.InputMessages;
 import java.util.Optional;
 
 public class SmawAdditionalMaterial implements IAdditionalMaterialOperations {
-    public static final double EFFECTIVE_ELECTRODE_LENGTH_FACTOR = 0.875;
+    private static final double EFFECTIVE_ELECTRODE_LENGTH_FACTOR = 0.875;
+    private static final int FROM_PERCENT_FACTOR = 100;
 
     private double effectiveElectrodeLength;
     private double electrodeDiameter;
     private double density;
+    private double electrodeYield;
 
     public SmawAdditionalMaterial(double electrodeLength, double electrodeDiameter,
-                                  double density) {
+                                  double density, double electrodeYield) {
         this.effectiveElectrodeLength = Optional.of(electrodeLength * EFFECTIVE_ELECTRODE_LENGTH_FACTOR)
                 .filter(el -> el > Properties.ELECTRODE_LENGTH_LIMIT)
                 .orElseThrow(() -> {
@@ -38,12 +40,20 @@ public class SmawAdditionalMaterial implements IAdditionalMaterialOperations {
                     return new IllegalArgumentException("Density cannot be <= " +
                             Properties.DENSITY_LIMIT);
                 });
+
+        this.electrodeYield = Optional.of(electrodeYield / FROM_PERCENT_FACTOR)
+                .filter(ey -> ey >= Properties.ELECTRODE_YIELD)
+                .orElseThrow(() -> {
+                    InputMessages.displayThisParamCannotBe(Properties.ELECTRODE_YIELD, "<");
+                    return new IllegalArgumentException("Electrode yield cannot be < " +
+                            Properties.ELECTRODE_YIELD);
+                });
     }
 
     @Override
     public double calculateNeededAdditionalMaterial(double jointMass) {
         return jointMass / (calculateCylinderVolume(density, electrodeDiameter, effectiveElectrodeLength) *
-                Properties.DEPOSITED_METAL_YIELD * Properties.WELD_SPATTER_FACTOR *
+                electrodeYield * Properties.WELD_SPATTER_FACTOR *
                 Properties.DESTROY_FACTOR);
     }
 }

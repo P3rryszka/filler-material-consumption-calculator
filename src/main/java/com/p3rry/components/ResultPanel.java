@@ -10,10 +10,10 @@ import java.awt.*;
 
 @Getter
 public class ResultPanel implements ISelfComponentSetter, IComponentsAdder, IComponentsSetter {
-    public static final int PANEL_X_POSITION = 300;
-    public static final int PANEL_Y_POSITION = 530;
-    public static final int PANEL_WIDTH = 180;
-    public static final int PANEL_HEIGHT = 50;
+    private static final int PANEL_X_POSITION = 300;
+    private static final int PANEL_Y_POSITION = 530;
+    private static final int PANEL_WIDTH = 180;
+    private static final int PANEL_HEIGHT = 50;
     private static final String INITIAL_VALUE = "0";
 
     private JPanel panel;

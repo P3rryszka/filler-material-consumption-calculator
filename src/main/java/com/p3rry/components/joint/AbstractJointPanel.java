@@ -9,19 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractJointPanel implements IListAdder, IComponentsSetter, ISelfComponentSetter, IComponentsAdder {
-    public static final int PANEL_X_POSITION = 0;
-    public static final int PANEL_Y_POSITION = 140;
-    public static final int PANEL_WIDTH = 300;
-    public static final int PANEL_HEIGHT = 500;
+    protected static final int PANEL_X_POSITION = 0;
+    protected static final int PANEL_Y_POSITION = 140;
+    protected static final int PANEL_WIDTH = 300;
+    protected static final int PANEL_HEIGHT = 500;
 
     protected JointLabel jointLabel;
     protected JointTextComponent jointTextComponent;
-    protected List<JLabel> labelsList;
 
     @Getter
     protected JPanel panel;
     @Getter
     protected List<JTextComponent> textComponentsList;
+    protected List<JLabel> labelsList;
 
     public AbstractJointPanel() {
         this.panel = new JPanel();
@@ -38,7 +38,8 @@ public abstract class AbstractJointPanel implements IListAdder, IComponentsSette
 
     @Override
     public void addComponents() {
-        manageComponents(textComponentsList, labelsList, panel);
+        labelsList.forEach(panel::add);
+        textComponentsList.forEach(panel::add);
     }
 
     @Override
@@ -50,11 +51,19 @@ public abstract class AbstractJointPanel implements IListAdder, IComponentsSette
 
     @Override
     public void setComponents() {
-        setListOfComponents(labelsList,70 , 0,
-                JointLabel.LABEL_WIDTH, JointLabel.LABEL_HEIGHT);
+        int yLabelPosition = 0;
+        for(var label : labelsList) {
+            label.setBounds(70, yLabelPosition,
+                    JointLabel.LABEL_WIDTH, JointLabel.LABEL_HEIGHT);
+            yLabelPosition += 70;
+        }
 
-        setListOfComponents(textComponentsList, 70, 30,
-                JointTextComponent.TEXT_COMPONENT_WIDTH, JointTextComponent.TEXT_COMPONENT_HEIGHT);
+        int yTextComponentPosition = 30;
+        for(var textComponent: textComponentsList) {
+            textComponent.setBounds(70, yTextComponentPosition,
+                    JointTextComponent.TEXT_COMPONENT_WIDTH, JointTextComponent.TEXT_COMPONENT_HEIGHT);
+            yTextComponentPosition += 70;
+        }
 
         labelsList.
                 forEach(label -> {

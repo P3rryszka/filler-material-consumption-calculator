@@ -10,15 +10,15 @@ import javax.swing.*;
 
 @Getter
 public class WeldingMethodSelectionPanel implements ISelfComponentSetter, IComponentsSetter, IComponentsAdder {
-    public static final int PANEL_X_POSITION = 300;
-    public static final int PANEL_Y_POSITION = 0;
-    public static final int PANEL_WIDTH = 180;
-    public static final int PANEL_HEIGHT = 140;
+    private static final int PANEL_X_POSITION = 300;
+    private static final int PANEL_Y_POSITION = 0;
+    private static final int PANEL_WIDTH = 180;
+    private static final int PANEL_HEIGHT = 140;
 
-    public static final int WELDING_METHOD_COMBOBOX_X_POSITION = 40;
-    public static final int WELDING_METHOD_COMBOBOX_Y_POSITION = 50;
-    public static final int WELDING_METHOD_COMBOBOX_WIDTH = 100;
-    public static final int WELDING_METHOD_COMBOBOX_HEIGHT = 40;
+    private static final int WELDING_METHOD_COMBOBOX_X_POSITION = 40;
+    private static final int WELDING_METHOD_COMBOBOX_Y_POSITION = 50;
+    private static final int WELDING_METHOD_COMBOBOX_WIDTH = 100;
+    private static final int WELDING_METHOD_COMBOBOX_HEIGHT = 40;
 
     private JPanel panel;
     private JComboBox<WeldingMethodType> weldingMethodComboBox;

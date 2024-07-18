@@ -1,19 +1,18 @@
-package com.p3rry.calculations;
+package com.p3rry.calculations.additionalmaterial;
 
-import com.p3rry.calculations.additionalmaterial.WeldingMethodFactory;
-import com.p3rry.consts.WeldingMethodType;
-import com.p3rry.utlis.InputParser;
 import com.p3rry.components.weldingmethod.AbstractWeldingMethodPanel;
 import lombok.NonNull;
+
+import java.util.Optional;
 
 public class AdditionalMaterialCalculator {
     private static final String MESSAGE = "Invalid input data type!";
 
     public static double calculateGmawAdditionalMaterial(@NonNull AbstractWeldingMethodPanel weldingMethodPanelType, double mass) {
         try {
-            double wireSpoolMass = InputParser.parseDoubleWeldingMethodPanel(weldingMethodPanelType, 0);
+            double wireSpoolMass = parseAndCheckNullDouble(weldingMethodPanelType, 0);
 
-            var weldingMethod = WeldingMethodFactory.createWeldingMethod(WeldingMethodType.GMAW, wireSpoolMass);
+            var weldingMethod = new GmawAdditionalMaterial(wireSpoolMass);
             return weldingMethod.calculateNeededAdditionalMaterial(mass);
         } catch (NumberFormatException e) {
             throw new RuntimeException(MESSAGE + e.getMessage());
@@ -23,10 +22,11 @@ public class AdditionalMaterialCalculator {
     public static double calculateSmawAdditionalMaterial(@NonNull AbstractWeldingMethodPanel weldingMethodPanelType, double mass,
                                                          double density) {
        try {
-           double electrodeLength = InputParser.parseDoubleWeldingMethodPanel(weldingMethodPanelType, 0);
-           double electrodeDiameter = InputParser.parseDoubleWeldingMethodPanel(weldingMethodPanelType, 1);
+           double electrodeLength = parseAndCheckNullDouble(weldingMethodPanelType, 0);
+           double electrodeDiameter = parseAndCheckNullDouble(weldingMethodPanelType, 1);
+           double electrodeYield = parseAndCheckNullDouble(weldingMethodPanelType, 2);
 
-           var weldingMethod = WeldingMethodFactory.createWeldingMethod(WeldingMethodType.SMAW, electrodeLength, electrodeDiameter, density);
+           var weldingMethod = new SmawAdditionalMaterial(electrodeLength, electrodeDiameter, density, electrodeYield);
            return weldingMethod.calculateNeededAdditionalMaterial(mass);
        } catch (NumberFormatException e) {
            throw new RuntimeException(MESSAGE + e.getMessage());
@@ -36,13 +36,19 @@ public class AdditionalMaterialCalculator {
     public static double calculateGtawAdditionalMaterial(@NonNull AbstractWeldingMethodPanel weldingMethodPanelType, double mass,
                                                          double density) {
         try {
-            double rodLength = InputParser.parseDoubleWeldingMethodPanel(weldingMethodPanelType, 0);
-            double rodDiameter = InputParser.parseDoubleWeldingMethodPanel(weldingMethodPanelType, 1);
+            double rodLength = parseAndCheckNullDouble(weldingMethodPanelType, 0);
+            double rodDiameter = parseAndCheckNullDouble(weldingMethodPanelType, 1);
 
-            var weldingMethod = WeldingMethodFactory.createWeldingMethod(WeldingMethodType.GTAW, rodLength, rodDiameter, density);
+            var weldingMethod = new GtawAdditionalMaterial(rodLength, rodDiameter, density);
             return weldingMethod.calculateNeededAdditionalMaterial(mass);
         } catch (NumberFormatException e) {
             throw new RuntimeException(MESSAGE + e.getMessage());
         }
+    }
+
+    private static double parseAndCheckNullDouble(@NonNull AbstractWeldingMethodPanel weldingMethodPanelType, int index) {
+        return Optional.ofNullable(weldingMethodPanelType.getTextComponentsList().get(index).getText())
+                .map(Double::parseDouble)
+                .orElseThrow(() -> new IllegalArgumentException("One from parsing values is null!"));
     }
 }

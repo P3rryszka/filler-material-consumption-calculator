@@ -7,7 +7,7 @@ import com.p3rry.utlis.InputMessages;
 import java.util.Optional;
 
 public class GtawAdditionalMaterial implements IAdditionalMaterialOperations{
-    public static final double EFFECTIVE_ROD_LENGTH = 1.04;
+    private static final double EFFECTIVE_ROD_LENGTH = 1.04;
     private double effectiveRodLength;
     private double rodDiameter;
     private double density;

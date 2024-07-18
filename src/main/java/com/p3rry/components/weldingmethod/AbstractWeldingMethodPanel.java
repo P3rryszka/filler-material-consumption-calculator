@@ -5,7 +5,6 @@ import com.p3rry.components.componentsmanagement.IComponentsSetter;
 import com.p3rry.components.componentsmanagement.IListAdder;
 import com.p3rry.components.componentsmanagement.ISelfComponentSetter;
 import lombok.Getter;
-import lombok.NonNull;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
@@ -13,19 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter, IComponentsAdder, IComponentsSetter, IListAdder {
-    public static final int PANEL_X_POSITION = 300;
-    public static final int PANEL_Y_POSITION = 140;
-    public static final int PANEL_WIDTH = 180;
-    public static final int PANEL_HEIGHT = 400;
+    protected static final int PANEL_X_POSITION = 300;
+    protected static final int PANEL_Y_POSITION = 140;
+    protected static final int PANEL_WIDTH = 180;
+    protected static final int PANEL_HEIGHT = 400;
 
     protected WeldingMethodLabels weldingMethodLabels;
     protected WeldingMethodTextComponents weldingMethodTextComponents;
-    protected List<JLabel> labelsList;
 
     @Getter
     protected JPanel panel;
     @Getter
     protected List<JTextComponent> textComponentsList;
+    protected List<JLabel> labelsList;
 
 
     public AbstractWeldingMethodPanel() {
@@ -43,7 +42,8 @@ public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter
 
     @Override
     public void addComponents() {
-       manageComponents(textComponentsList, labelsList, panel);
+       labelsList.forEach(panel::add);
+       textComponentsList.forEach(panel::add);
     }
 
     @Override

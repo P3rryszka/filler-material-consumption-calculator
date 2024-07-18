@@ -13,13 +13,14 @@ public class WeldingMethodTextComponents {
     private JTextField wireSpoolMassTextField;
     
     private JTextField electrodeLengthTextField,
-            electrodeDiameterTextField, rodLengthTextField,
-            rodDiameterTextField;
+            electrodeDiameterTextField, electordeYieldTextField,
+            rodLengthTextField, rodDiameterTextField;
 
     public WeldingMethodTextComponents() {
         this.wireSpoolMassTextField = InputBlocker.numberLimitInput();
         this.electrodeLengthTextField = InputBlocker.numberLimitInput();
         this.electrodeDiameterTextField = InputBlocker.numberLimitInput();
+        this.electordeYieldTextField = InputBlocker.numberLimitInput();
         this.rodLengthTextField = InputBlocker.numberLimitInput();
         this.rodDiameterTextField = InputBlocker.numberLimitInput();
     }

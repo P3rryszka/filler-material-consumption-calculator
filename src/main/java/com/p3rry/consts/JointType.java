@@ -1,6 +1,6 @@
 package com.p3rry.consts;
 
-public enum Description {
+public enum JointType {
     NO_BEVEL_JOINT,
     V_BEVEL_JOINT,
     Y_BEVEL_JOINT,
