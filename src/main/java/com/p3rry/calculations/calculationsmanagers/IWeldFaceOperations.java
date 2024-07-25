@@ -1,4 +1,4 @@
-package com.p3rry.calculations.calculationsmanagement;
+package com.p3rry.calculations.calculationsmanagers;
 
 import com.p3rry.consts.Properties;
 import com.p3rry.consts.QualityLevel;

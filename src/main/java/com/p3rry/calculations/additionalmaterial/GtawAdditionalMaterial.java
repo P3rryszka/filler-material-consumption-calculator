@@ -1,13 +1,13 @@
 package com.p3rry.calculations.additionalmaterial;
 
-import com.p3rry.calculations.calculationsmanagement.IAdditionalMaterialOperations;
+import com.p3rry.calculations.calculationsmanagers.IAdditionalMaterialOperations;
 import com.p3rry.consts.Properties;
 import com.p3rry.utlis.InputMessages;
 
 import java.util.Optional;
 
 public class GtawAdditionalMaterial implements IAdditionalMaterialOperations{
-    private static final double EFFECTIVE_ROD_LENGTH = 1.04;
+    private static final double EFFECTIVE_ROD_LENGTH = 0.96;
     private double effectiveRodLength;
     private double rodDiameter;
     private double density;

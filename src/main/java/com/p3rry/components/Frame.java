@@ -2,10 +2,9 @@ package com.p3rry.components;
 
 import com.p3rry.calculations.additionalmaterial.AdditionalMaterialCalculator;
 import com.p3rry.calculations.MassCalculator;
-import com.p3rry.components.componentsmanagement.IListAdder;
-import com.p3rry.components.componentsmanagement.IListeningAdder;
-import com.p3rry.components.componentsmanagement.IComponentsAdder;
-import com.p3rry.components.componentsmanagement.ISelfComponentSetter;
+import com.p3rry.components.componentsmanagers.IListAdder;
+import com.p3rry.components.componentsmanagers.IComponentsAdder;
+import com.p3rry.components.componentsmanagers.ISelfComponentSetter;
 import com.p3rry.components.joint.JointSelectionPanel;
 import com.p3rry.components.joint.AbstractJointPanel;
 import com.p3rry.components.joint.JointPanelFactory;
@@ -27,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSetter, IListAdder, IListeningAdder, ActionListener {
+public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSetter, IListAdder, ActionListener {
     private static final int FRAME_WIDTH = 495;
     private static final int FRAME_HEIGHT = 690;
     private double count;
@@ -78,7 +77,17 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         addToList();
         setSelfComponent();
         addComponents();
-        addListening();
+        addListeners();
+    }
+
+    public void addListeners() {
+        jointSelectionPanel.getJointComboBox().addActionListener(this);
+        weldingMethodSelectionPanel.getWeldingMethodComboBox().addActionListener(this);
+
+        controlPanel.getCleanJointPanelButton().addActionListener(this);
+        controlPanel.getCleanWeldingMethodPanelButton().addActionListener(this);
+        controlPanel.getAddButton().addActionListener(this);
+        controlPanel.getResetButton().addActionListener(this);
     }
 
     @Override
@@ -87,17 +96,6 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         this.add(weldingMethodSelectionPanel.getPanel());
         this.add(controlPanel.getPanel());
         this.add(resultPanel.getPanel());
-    }
-
-    @Override
-    public void addListening() {
-        jointSelectionPanel.getJointComboBox().addActionListener(this);
-        weldingMethodSelectionPanel.getWeldingMethodComboBox().addActionListener(this);
-
-        controlPanel.getCleanJointPanelButton().addActionListener(this);
-        controlPanel.getCleanWeldingMethodPanelButton().addActionListener(this);
-        controlPanel.getAddButton().addActionListener(this);
-        controlPanel.getResetButton().addActionListener(this);
     }
 
     @Override
@@ -227,9 +225,6 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
                 else
                     throw new IllegalArgumentException("Current joint panel is invalid!");
 
-                //Mass checkpoint
-                System.out.println("Mass checkpoint: " + mass);
-
                 double additionalMaterial;
                 if (currentWeldingMethod == gmawPanel)
                     additionalMaterial = AdditionalMaterialCalculator.calculateGmawAdditionalMaterial(gmawPanel, mass);
@@ -240,11 +235,19 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
                 else
                     throw new IllegalArgumentException("Current welding method panel is invalid!");
 
+                count += additionalMaterial;
+                resultPanel.getResultTextField().setText(String.valueOf((int) count + 1));
+
+                //Mass checkpoint
+                System.out.println("Mass checkpoint: " + mass);
+
                 //Additional material checkpoint
                 System.out.println("Additional material checkpoint: " + additionalMaterial);
 
-                count += additionalMaterial;
-                resultPanel.getResultTextField().setText(String.valueOf((int) count + 1));
+                //Sum of additional material -> count checkpoint
+                System.out.println("Sum of additional material checkpoint: " + count);
+
+                System.out.println("*************************************************");
             }
         }
     }

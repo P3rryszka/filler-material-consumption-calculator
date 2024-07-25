@@ -1,8 +1,8 @@
 package com.p3rry.components;
 
-import com.p3rry.components.componentsmanagement.IComponentsAdder;
-import com.p3rry.components.componentsmanagement.IComponentsSetter;
-import com.p3rry.components.componentsmanagement.ISelfComponentSetter;
+import com.p3rry.components.componentsmanagers.IComponentsAdder;
+import com.p3rry.components.componentsmanagers.IComponentsSetter;
+import com.p3rry.components.componentsmanagers.ISelfComponentSetter;
 import lombok.Getter;
 
 import javax.swing.*;
@@ -14,6 +14,7 @@ public class ResultPanel implements ISelfComponentSetter, IComponentsAdder, ICom
     private static final int PANEL_Y_POSITION = 530;
     private static final int PANEL_WIDTH = 180;
     private static final int PANEL_HEIGHT = 50;
+
     private static final String INITIAL_VALUE = "0";
 
     private JPanel panel;

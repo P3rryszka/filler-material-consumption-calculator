@@ -1,4 +1,4 @@
-package com.p3rry.components.componentsmanagement;
+package com.p3rry.components.componentsmanagers;
 
 @FunctionalInterface
 public interface IListAdder {

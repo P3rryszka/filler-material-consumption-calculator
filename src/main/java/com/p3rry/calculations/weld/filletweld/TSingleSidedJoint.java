@@ -1,8 +1,8 @@
 package com.p3rry.calculations.weld.filletweld;
 
-import com.p3rry.calculations.calculationsmanagement.IAngleOperations;
-import com.p3rry.calculations.calculationsmanagement.IGrooveOperations;
-import com.p3rry.calculations.calculationsmanagement.IWeldOperations;
+import com.p3rry.calculations.calculationsmanagers.IAngleOperations;
+import com.p3rry.calculations.calculationsmanagers.IGrooveOperations;
+import com.p3rry.calculations.calculationsmanagers.IWeldOperations;
 import com.p3rry.calculations.weld.AbstractFilletWeld;
 import com.p3rry.consts.QualityLevel;
 

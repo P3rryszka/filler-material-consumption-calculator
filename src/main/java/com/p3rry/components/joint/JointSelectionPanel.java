@@ -1,8 +1,8 @@
 package com.p3rry.components.joint;
 
-import com.p3rry.components.componentsmanagement.IComponentsAdder;
-import com.p3rry.components.componentsmanagement.IComponentsSetter;
-import com.p3rry.components.componentsmanagement.ISelfComponentSetter;
+import com.p3rry.components.componentsmanagers.IComponentsAdder;
+import com.p3rry.components.componentsmanagers.IComponentsSetter;
+import com.p3rry.components.componentsmanagers.ISelfComponentSetter;
 import com.p3rry.consts.JointType;
 import lombok.Getter;
 
@@ -12,10 +12,10 @@ import java.io.IOException;
 
 @Getter
 public class JointSelectionPanel implements ISelfComponentSetter, IComponentsSetter, IComponentsAdder {
-    public static final int PANEL_X_POSITION = 0;
-    public static final int PANEL_Y_POSITION = 0;
-    public static final int PANEL_WIDTH = 300;
-    public static final int PANEL_HEIGHT = 140;
+    private static final int PANEL_X_POSITION = 0;
+    private static final int PANEL_Y_POSITION = 0;
+    private static final int PANEL_WIDTH = 300;
+    private static final int PANEL_HEIGHT = 140;
 
     private static final int JOINT_COMBOBOX_X_POSITION = 40;
     private static final int JOINT_COMBOBOX_Y_POSITION = 10;
@@ -88,9 +88,8 @@ public class JointSelectionPanel implements ISelfComponentSetter, IComponentsSet
             dm.addElement(tSingleSidedJoint);
 
             return dm;
-        } catch (IOException | IllegalArgumentException e) {
-            e.printStackTrace();
-            return dm;
+        } catch (IOException e) {
+            throw new RuntimeException("Issues with streaming image! " + e.getMessage());
         }
     }
 }

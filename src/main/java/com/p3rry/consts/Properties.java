@@ -15,7 +15,7 @@ public class Properties {
     public static final double ROD_LENGTH_LIMIT = 0;
     public static final double ROD_DIAMETER_LIMIT = 0;
     public static final double DENSITY_LIMIT = 0;
-    public static final double ELECTRODE_YIELD = 1;
+    public static final double ELECTRODE_YIELD_LIMIT = 100;
 
 
     public static final double WELD_FACE_WIDTH_ALLOWANCE = 4;

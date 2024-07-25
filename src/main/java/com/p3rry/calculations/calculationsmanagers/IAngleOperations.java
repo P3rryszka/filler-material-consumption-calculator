@@ -1,4 +1,4 @@
-package com.p3rry.calculations.calculationsmanagement;
+package com.p3rry.calculations.calculationsmanagers;
 
 public interface IAngleOperations {
     default double convertIntoDegrees(double value, double divider) {

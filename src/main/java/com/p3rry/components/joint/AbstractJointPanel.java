@@ -1,6 +1,6 @@
 package com.p3rry.components.joint;
 
-import com.p3rry.components.componentsmanagement.*;
+import com.p3rry.components.componentsmanagers.*;
 import lombok.Getter;
 
 import javax.swing.*;
@@ -51,19 +51,14 @@ public abstract class AbstractJointPanel implements IListAdder, IComponentsSette
 
     @Override
     public void setComponents() {
-        int yLabelPosition = 0;
-        for(var label : labelsList) {
-            label.setBounds(70, yLabelPosition,
-                    JointLabel.LABEL_WIDTH, JointLabel.LABEL_HEIGHT);
-            yLabelPosition += 70;
-        }
 
-        int yTextComponentPosition = 30;
-        for(var textComponent: textComponentsList) {
-            textComponent.setBounds(70, yTextComponentPosition,
-                    JointTextComponent.TEXT_COMPONENT_WIDTH, JointTextComponent.TEXT_COMPONENT_HEIGHT);
-            yTextComponentPosition += 70;
-        }
+        positionComponentsWithOffset(labelsList, 70, 0,
+                JointLabel.LABEL_WIDTH, JointLabel.LABEL_HEIGHT,
+                0, 70);
+
+        positionComponentsWithOffset(textComponentsList, 70, 30,
+                JointTextComponent.TEXT_COMPONENT_WIDTH, JointTextComponent.TEXT_COMPONENT_HEIGHT,
+                0, 70);
 
         labelsList.
                 forEach(label -> {

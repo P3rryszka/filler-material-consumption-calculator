@@ -1,8 +1,8 @@
 package com.p3rry.components.weldingmethod;
 
-import com.p3rry.components.componentsmanagement.IComponentsAdder;
-import com.p3rry.components.componentsmanagement.IComponentsSetter;
-import com.p3rry.components.componentsmanagement.ISelfComponentSetter;
+import com.p3rry.components.componentsmanagers.IComponentsAdder;
+import com.p3rry.components.componentsmanagers.IComponentsSetter;
+import com.p3rry.components.componentsmanagers.ISelfComponentSetter;
 import com.p3rry.consts.WeldingMethodType;
 import lombok.Getter;
 

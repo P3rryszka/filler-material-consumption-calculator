@@ -1,9 +1,9 @@
 package com.p3rry.components.weldingmethod;
 
-import com.p3rry.components.componentsmanagement.IComponentsAdder;
-import com.p3rry.components.componentsmanagement.IComponentsSetter;
-import com.p3rry.components.componentsmanagement.IListAdder;
-import com.p3rry.components.componentsmanagement.ISelfComponentSetter;
+import com.p3rry.components.componentsmanagers.IComponentsAdder;
+import com.p3rry.components.componentsmanagers.IComponentsSetter;
+import com.p3rry.components.componentsmanagers.IListAdder;
+import com.p3rry.components.componentsmanagers.ISelfComponentSetter;
 import lombok.Getter;
 
 import javax.swing.*;
@@ -25,7 +25,6 @@ public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter
     @Getter
     protected List<JTextComponent> textComponentsList;
     protected List<JLabel> labelsList;
-
 
     public AbstractWeldingMethodPanel() {
         this.panel = new JPanel();

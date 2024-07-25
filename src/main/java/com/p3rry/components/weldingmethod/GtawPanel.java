@@ -13,16 +13,14 @@ public class GtawPanel extends AbstractWeldingMethodPanel{
 
     @Override
     public void setComponents() {
-        labelsList.get(0).setBounds(10,0,
+        labelsList.getFirst().setBounds(10, 0,
                 WeldingMethodLabels.LABEL_WIDTH, WeldingMethodLabels.LABEL_HEIGHT);
-        labelsList.get(1).setBounds(10, 30,
-                WeldingMethodLabels.LABEL_WIDTH, WeldingMethodLabels.LABEL_HEIGHT);
-        textComponentsList.get(0).setBounds(10,60,
-                WeldingMethodTextComponents.TEXT_COMPONENT_WIDTH, WeldingMethodTextComponents.TEXT_COMPONENT_HEIGHT);
-        labelsList.get(2).setBounds(10, 100,
-                WeldingMethodLabels.LABEL_WIDTH, WeldingMethodLabels.LABEL_HEIGHT);
-        textComponentsList.get(1).setBounds(10, 130,
-                WeldingMethodTextComponents.TEXT_COMPONENT_WIDTH, WeldingMethodTextComponents.TEXT_COMPONENT_HEIGHT);
+        positionComponentsWithOffset(labelsList, 10, 30,
+                WeldingMethodLabels.LABEL_WIDTH, WeldingMethodLabels.LABEL_HEIGHT,
+                1, 70);
+        positionComponentsWithOffset(textComponentsList, 10, 60,
+                WeldingMethodTextComponents.TEXT_COMPONENT_WIDTH, WeldingMethodTextComponents.TEXT_COMPONENT_HEIGHT,
+                0, 70);
 
         weldingMethodLabels.getNameInfo().setText("GTAW");
     }

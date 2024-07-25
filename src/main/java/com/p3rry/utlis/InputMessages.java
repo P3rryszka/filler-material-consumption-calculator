@@ -10,18 +10,20 @@ public class InputMessages {
             case ("JP") -> JOptionPane.showMessageDialog(null, "Select joint panel!", "", JOptionPane.INFORMATION_MESSAGE);
             case ("WP") -> JOptionPane.showMessageDialog(null, "Select welding method panel!", "", JOptionPane.INFORMATION_MESSAGE);
             case ("BP") -> JOptionPane.showMessageDialog(null, "Select panels!", "", JOptionPane.INFORMATION_MESSAGE);
-            default -> throw new IllegalArgumentException("Invalid selection type!");
+            default ->
+                    throw new IllegalArgumentException("Invalid selection type!");
         }
     }
 
-    public static void displayThisParamCannotBe(double value, String  inequalityType) {
+    public static void displayThisParamCannotBe(double value, String inequalityType) {
         switch (inequalityType) {
             case ("<") -> JOptionPane.showMessageDialog(null, "This parameter cannot be < " + value, "", JOptionPane.WARNING_MESSAGE);
             case ("<=") -> JOptionPane.showMessageDialog(null, "This parameter cannot be <= " + value, "", JOptionPane.WARNING_MESSAGE);
             case ("=") -> JOptionPane.showMessageDialog(null, "This parameter cannot be = " + value, "", JOptionPane.WARNING_MESSAGE);
             case (">") -> JOptionPane.showMessageDialog(null, "This parameter cannot be > " + value, "", JOptionPane.WARNING_MESSAGE);
             case(">=") -> JOptionPane.showMessageDialog(null, "This parameter cannot be >= " + value, "", JOptionPane.WARNING_MESSAGE);
-            default -> throw new IllegalArgumentException("Invalid inequality type!");
+            default ->
+                    throw new IllegalArgumentException("Invalid inequality type!");
         }
     }
 

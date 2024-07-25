@@ -15,7 +15,8 @@ public class WeldingMethodPanelFactory {
             case GTAW -> {
                 return new GtawPanel();
             }
-            default ->  throw new IllegalArgumentException("Invalid welding method type!");
+            default ->
+                    throw new IllegalArgumentException("Invalid welding method type!");
         }
     }
 }

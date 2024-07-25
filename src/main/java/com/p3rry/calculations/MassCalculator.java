@@ -1,6 +1,6 @@
 package com.p3rry.calculations;
 
-import com.p3rry.calculations.calculationsmanagement.IWeldOperations;
+import com.p3rry.calculations.calculationsmanagers.IWeldOperations;
 import com.p3rry.calculations.weld.Mass;
 import com.p3rry.calculations.weld.buttweld.*;
 import com.p3rry.calculations.weld.filletweld.TSingleSidedJoint;

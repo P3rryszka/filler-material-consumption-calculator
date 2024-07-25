@@ -1,6 +1,6 @@
 package com.p3rry.calculations.weld.buttweld;
 
-import com.p3rry.calculations.calculationsmanagement.*;
+import com.p3rry.calculations.calculationsmanagers.*;
 import com.p3rry.calculations.weld.AbstractButtWeld;
 import com.p3rry.consts.QualityLevel;
 
@@ -15,7 +15,6 @@ public class YBevelJoint extends AbstractButtWeld implements IGrooveOperations, 
         this.bevelAngle = initializeBevelAngle(bevelAngle);
         this.bead = initializeBead(bead);
     }
-
 
     @Override
     public double calculateGrooveWidth() {

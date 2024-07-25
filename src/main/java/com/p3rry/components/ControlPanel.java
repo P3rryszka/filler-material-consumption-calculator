@@ -1,7 +1,7 @@
 package com.p3rry.components;
 
-import com.p3rry.components.componentsmanagement.IComponentsAdder;
-import com.p3rry.components.componentsmanagement.ISelfComponentSetter;
+import com.p3rry.components.componentsmanagers.IComponentsAdder;
+import com.p3rry.components.componentsmanagers.ISelfComponentSetter;
 import lombok.Getter;
 
 import javax.swing.*;
