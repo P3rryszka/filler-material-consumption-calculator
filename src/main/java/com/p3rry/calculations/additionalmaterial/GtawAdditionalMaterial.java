@@ -41,6 +41,6 @@ public class GtawAdditionalMaterial implements IAdditionalMaterialOperations{
 
     @Override
     public double calculateNeededAdditionalMaterial(double jointMass) {
-        return jointMass / (calculateCylinderVolume(density, rodDiameter, effectiveRodLength));
+        return jointMass / (calculateCylinderShapeMass(density, rodDiameter, effectiveRodLength));
     }
 }

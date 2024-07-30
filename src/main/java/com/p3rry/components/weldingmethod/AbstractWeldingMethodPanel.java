@@ -8,6 +8,7 @@ import lombok.Getter;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter
     protected static final int PANEL_X_POSITION = 300;
     protected static final int PANEL_Y_POSITION = 140;
     protected static final int PANEL_WIDTH = 180;
-    protected static final int PANEL_HEIGHT = 400;
+    protected static final int PANEL_HEIGHT = 310;
 
     protected WeldingMethodLabels weldingMethodLabels;
     protected WeldingMethodTextComponents weldingMethodTextComponents;

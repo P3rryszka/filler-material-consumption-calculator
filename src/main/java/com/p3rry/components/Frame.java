@@ -1,5 +1,6 @@
 package com.p3rry.components;
 
+import com.p3rry.calculations.DensityParser;
 import com.p3rry.calculations.additionalmaterial.AdditionalMaterialCalculator;
 import com.p3rry.calculations.MassCalculator;
 import com.p3rry.components.componentsmanagers.IListAdder;
@@ -25,10 +26,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSetter, IListAdder, ActionListener {
     private static final int FRAME_WIDTH = 495;
     private static final int FRAME_HEIGHT = 690;
+    private static final String CLEAN_INFORMATION = "Every parameter is empty! Nothing to clear!";
     private double count;
 
     private JointSelectionPanel jointSelectionPanel;
@@ -53,6 +56,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
 
     private ControlPanel controlPanel;
     private ResultPanel resultPanel;
+    private BaseMaterialDensityPanel baseMaterialDensityPanel;
 
     public Frame() {
         this.jointPanelList = new ArrayList<>();
@@ -73,6 +77,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         this.weldingMethodSelectionPanel = new WeldingMethodSelectionPanel();
         this.controlPanel = new ControlPanel();
         this.resultPanel = new ResultPanel();
+        this.baseMaterialDensityPanel = new BaseMaterialDensityPanel();
 
         addToList();
         setSelfComponent();
@@ -88,6 +93,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         controlPanel.getCleanWeldingMethodPanelButton().addActionListener(this);
         controlPanel.getAddButton().addActionListener(this);
         controlPanel.getResetButton().addActionListener(this);
+        controlPanel.getCleanDensityPanelButton().addActionListener(this);
     }
 
     @Override
@@ -96,6 +102,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         this.add(weldingMethodSelectionPanel.getPanel());
         this.add(controlPanel.getPanel());
         this.add(resultPanel.getPanel());
+        this.add(baseMaterialDensityPanel.getPanel());
     }
 
     @Override
@@ -137,6 +144,8 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
             handleCleanWeldingMethodPanelButton();
         else if (e.getSource() == controlPanel.getCleanJointPanelButton())
             handleCleanJointPanelButton();
+        else if (e.getSource() == controlPanel.getCleanDensityPanelButton())
+            handleCleanDensityPanelButton();
         else if(e.getSource() == controlPanel.getAddButton())
             handleAddButton();
     }
@@ -176,7 +185,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         } else {
             if(checkIfAllComponentsAreEmpty(currentWeldingMethod.getTextComponentsList())) {
                 InputMessages.displayAllParamsAreEmpty();
-                System.err.println("Every parameter is empty! Nothing to clear!");
+                System.err.println(CLEAN_INFORMATION);
             } else
                 cleanComponents(currentWeldingMethod.getTextComponentsList());
         }
@@ -189,10 +198,18 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         } else {
             if(checkIfAllComponentsAreEmpty(currentPanel.getTextComponentsList())) {
                 InputMessages.displayAllParamsAreEmpty();
-                System.err.println("Every parameter is empty! Nothing to clear!");
+                System.err.println(CLEAN_INFORMATION);
             } else
                 cleanComponents(currentPanel.getTextComponentsList());
         }
+    }
+
+    private void handleCleanDensityPanelButton() {
+        if(baseMaterialDensityPanel.getBaseMaterialDensityTextField().getText().isEmpty()) {
+            InputMessages.displayAllParamsAreEmpty();
+            System.err.println(CLEAN_INFORMATION);
+        } else
+            baseMaterialDensityPanel.getBaseMaterialDensityTextField().setText("");
     }
 
     private void handleAddButton() {
@@ -202,26 +219,29 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
             InputMessages.displaySelectPanel("BP");
         } else {
             if (checkIfAnyComponentIsEmpty(currentPanel.getTextComponentsList()) ||
-                    checkIfAnyComponentIsEmpty(currentWeldingMethod.getTextComponentsList())) {
-                System.err.println("Make sure a parameter is provided within selected joint panel or welding method panel!");
+                    checkIfAnyComponentIsEmpty(currentWeldingMethod.getTextComponentsList()) ||
+                    baseMaterialDensityPanel.getBaseMaterialDensityTextField().getText().isEmpty()) {
+                System.err.println("Make sure a parameter is provided within joint panel, welding method panel or density panel!");
                 InputMessages.displayEmptyParam();
             } else {
+                double baseMaterialDensity = (DensityParser.parseBaseMaterialDensity(baseMaterialDensityPanel)
+                        * Properties.TO_KG_MM3_FACTOR);
                 double mass;
 
                 if (currentPanel == noBevelJointPanel)
-                    mass = MassCalculator.calculateNoBevelJointMass(noBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
+                    mass = MassCalculator.calculateNoBevelJointMass(noBevelJointPanel, baseMaterialDensity);
                 else if (currentPanel == vBevelJointPanel)
-                    mass = MassCalculator.calculateVBevelJointMass(vBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
+                    mass = MassCalculator.calculateVBevelJointMass(vBevelJointPanel, baseMaterialDensity);
                 else if (currentPanel == yBevelJointPanel)
-                    mass = MassCalculator.calculateYBevelJoint(yBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
+                    mass = MassCalculator.calculateYBevelJoint(yBevelJointPanel, baseMaterialDensity);
                 else if (currentPanel == xBevelJointPanel)
-                    mass = MassCalculator.calculateXBevelJoint(xBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
+                    mass = MassCalculator.calculateXBevelJoint(xBevelJointPanel, baseMaterialDensity);
                 else if (currentPanel == kBevelJointPanel)
-                    mass = MassCalculator.calculateKBevelJoint(kBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
+                    mass = MassCalculator.calculateKBevelJoint(kBevelJointPanel, baseMaterialDensity);
                 else if (currentPanel == uBevelJointPanel)
-                    mass = MassCalculator.calculateUBevelJoint(uBevelJointPanel, Properties.STEEL_DENSITY_KG_MM3);
+                    mass = MassCalculator.calculateUBevelJoint(uBevelJointPanel, baseMaterialDensity);
                 else if (currentPanel == tSingleSidedJointPanel)
-                    mass = MassCalculator.calculateTSingleSidedJoint(tSingleSidedJointPanel, Properties.STEEL_DENSITY_KG_MM3);
+                    mass = MassCalculator.calculateTSingleSidedJoint(tSingleSidedJointPanel, baseMaterialDensity);
                 else
                     throw new IllegalArgumentException("Current joint panel is invalid!");
 
@@ -229,9 +249,9 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
                 if (currentWeldingMethod == gmawPanel)
                     additionalMaterial = AdditionalMaterialCalculator.calculateGmawAdditionalMaterial(gmawPanel, mass);
                 else if (currentWeldingMethod == smawPanel)
-                    additionalMaterial = AdditionalMaterialCalculator.calculateSmawAdditionalMaterial(smawPanel, mass, Properties.STEEL_DENSITY_KG_MM3);
+                    additionalMaterial = AdditionalMaterialCalculator.calculateSmawAdditionalMaterial(smawPanel, mass);
                 else if (currentWeldingMethod == gtawPanel)
-                    additionalMaterial = AdditionalMaterialCalculator.calculateGtawAdditionalMaterial(gtawPanel, mass, Properties.STEEL_DENSITY_KG_MM3);
+                    additionalMaterial = AdditionalMaterialCalculator.calculateGtawAdditionalMaterial(gtawPanel, mass);
                 else
                     throw new IllegalArgumentException("Current welding method panel is invalid!");
 

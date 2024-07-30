@@ -16,7 +16,7 @@ public class ControlPanel implements ISelfComponentSetter, IComponentsAdder {
 
     private JPanel panel;
     private JButton cleanJointPanelButton, cleanWeldingMethodPanelButton,
-            addButton, resetButton;
+            cleanDensityPanelButton, addButton, resetButton;
 
     public ControlPanel() {
         this.panel = new JPanel();
@@ -24,6 +24,7 @@ public class ControlPanel implements ISelfComponentSetter, IComponentsAdder {
         this.cleanJointPanelButton = new JButton("JC");
         this.cleanWeldingMethodPanelButton = new JButton("WMC");
         this.resetButton = new JButton("R");
+        this.cleanDensityPanelButton = new JButton("DC");
 
         setSelfComponent();
         addComponents();
@@ -40,6 +41,7 @@ public class ControlPanel implements ISelfComponentSetter, IComponentsAdder {
     public void addComponents() {
         panel.add(cleanJointPanelButton);
         panel.add(cleanWeldingMethodPanelButton);
+        panel.add(cleanDensityPanelButton);
         panel.add(addButton);
         panel.add(resetButton);
     }

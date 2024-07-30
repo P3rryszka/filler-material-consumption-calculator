@@ -52,8 +52,8 @@ public class SmawAdditionalMaterial implements IAdditionalMaterialOperations {
 
     @Override
     public double calculateNeededAdditionalMaterial(double jointMass) {
-        return jointMass / (calculateCylinderVolume(density, electrodeDiameter, effectiveElectrodeLength) *
+        return jointMass / ((calculateCylinderShapeMass(density, electrodeDiameter, effectiveElectrodeLength) *
                 (electrodeYield / PERCENT_FACTOR) * Properties.WELD_SPATTER_FACTOR *
-                Properties.DESTROY_FACTOR);
+                Properties.DESTROY_FACTOR));
     }
 }

@@ -13,7 +13,8 @@ public class WeldingMethodLabels {
     private JLabel wireSpoolMassLabel;
     private JLabel electrodeLengthLabel,
             electrodeDiameterLabel, electrodeYield,
-            rodLengthLabel, rodDiameterLabel;
+            rodLengthLabel, rodDiameterLabel,
+            densityLabel;
 
     public WeldingMethodLabels() {
         this.nameInfo = new JLabel();
@@ -23,5 +24,6 @@ public class WeldingMethodLabels {
         this.electrodeYield = new JLabel("Electrode yield [%]");
         this.rodLengthLabel = new JLabel("Rod length [mm]: ");
         this.rodDiameterLabel = new JLabel("Rod diameter [mm]: ");
+        this.densityLabel = new JLabel("Filler material density [g/cm3]: ");
     }
 }

@@ -7,10 +7,12 @@ public class SmawPanel extends AbstractWeldingMethodPanel {
         labelsList.add(weldingMethodLabels.getElectrodeLengthLabel());
         labelsList.add(weldingMethodLabels.getElectrodeDiameterLabel());
         labelsList.add(weldingMethodLabels.getElectrodeYield());
+        labelsList.add(weldingMethodLabels.getDensityLabel());
 
         textComponentsList.add(weldingMethodTextComponents.getElectrodeLengthTextField());
         textComponentsList.add(weldingMethodTextComponents.getElectrodeDiameterTextField());
         textComponentsList.add(weldingMethodTextComponents.getElectordeYieldTextField());
+        textComponentsList.add(weldingMethodTextComponents.getDensityTextField());
     }
 
     @Override

@@ -6,9 +6,11 @@ public class GtawPanel extends AbstractWeldingMethodPanel{
         labelsList.add(weldingMethodLabels.getNameInfo());
         labelsList.add(weldingMethodLabels.getRodLengthLabel());
         labelsList.add(weldingMethodLabels.getRodDiameterLabel());
+        labelsList.add(weldingMethodLabels.getDensityLabel());
 
         textComponentsList.add(weldingMethodTextComponents.getRodLengthTextField());
         textComponentsList.add(weldingMethodTextComponents.getRodDiameterTextField());
+        textComponentsList.add(weldingMethodTextComponents.getDensityTextField());
     }
 
     @Override
