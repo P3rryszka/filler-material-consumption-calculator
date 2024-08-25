@@ -2,48 +2,47 @@ package com.p3rry.components.weldingmethod;
 
 import com.p3rry.components.componentsmanagers.IComponentsAdder;
 import com.p3rry.components.componentsmanagers.IComponentsSetter;
-import com.p3rry.components.componentsmanagers.IListAdder;
 import com.p3rry.components.componentsmanagers.ISelfComponentSetter;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter, IComponentsAdder, IComponentsSetter, IListAdder {
+public class WeldingMethodPanel implements ISelfComponentSetter, IComponentsAdder, IComponentsSetter {
     protected static final int PANEL_X_POSITION = 300;
     protected static final int PANEL_Y_POSITION = 140;
     protected static final int PANEL_WIDTH = 180;
     protected static final int PANEL_HEIGHT = 310;
 
-    protected WeldingMethodLabels weldingMethodLabels;
-    protected WeldingMethodTextComponents weldingMethodTextComponents;
 
     @Getter
     protected JPanel panel;
     @Getter
     protected List<JTextComponent> textComponentsList;
+    protected JLabel name;
     protected List<JLabel> labelsList;
 
-    public AbstractWeldingMethodPanel() {
-        this.panel = new JPanel();
-        this.weldingMethodLabels = new WeldingMethodLabels();
-        this.weldingMethodTextComponents = new WeldingMethodTextComponents();
-        this.labelsList = new ArrayList<>();
-        this.textComponentsList = new ArrayList<>();
+    @Builder
+    public WeldingMethodPanel(List<JLabel> labelsList, List<JTextComponent> textComponentList,
+                              JLabel name) {
 
-        addToList();
+        this.labelsList = labelsList;
+        this.textComponentsList = textComponentList;
+        this.name = name;
+        this.panel = new JPanel();
+
         setSelfComponent();
-        setComponents();
         addComponents();
+        setComponents();
     }
 
     @Override
     public void addComponents() {
        labelsList.forEach(panel::add);
        textComponentsList.forEach(panel::add);
+       panel.add(this.name);
     }
 
     @Override
@@ -51,5 +50,16 @@ public abstract class AbstractWeldingMethodPanel implements ISelfComponentSetter
         panel.setLayout(null);
         panel.setBounds(PANEL_X_POSITION, PANEL_Y_POSITION,
                 PANEL_WIDTH, PANEL_HEIGHT);
+    }
+
+    @Override
+    public void setComponents() {
+
+        this.name.setBounds(10, 0,
+                WeldingMethodLabels.LABEL_WIDTH, WeldingMethodLabels.LABEL_HEIGHT);
+        positionComponentsWithOffset(labelsList, 10, 30,
+                WeldingMethodLabels.LABEL_WIDTH, WeldingMethodLabels.LABEL_HEIGHT, 70);
+        positionComponentsWithOffset(textComponentsList, 10, 60,
+                WeldingMethodTextComponents.TEXT_COMPONENT_WIDTH, WeldingMethodTextComponents.TEXT_COMPONENT_HEIGHT, 70);
     }
 }

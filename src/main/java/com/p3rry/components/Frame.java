@@ -4,11 +4,9 @@ import com.p3rry.calculations.additionalmaterial.AdditionalMaterialCalculator;
 import com.p3rry.calculations.MassCalculator;
 import com.p3rry.components.componentsmanagers.IComponentsAdder;
 import com.p3rry.components.componentsmanagers.ISelfComponentSetter;
-import com.p3rry.components.joint.JointSelectionPanel;
-import com.p3rry.components.joint.AbstractJointPanel;
-import com.p3rry.components.joint.JointPanelFactory;
+import com.p3rry.components.joint.*;
 import com.p3rry.utlis.InputMessages;
-import com.p3rry.components.weldingmethod.AbstractWeldingMethodPanel;
+import com.p3rry.components.weldingmethod.WeldingMethodPanel;
 import com.p3rry.components.weldingmethod.WeldingMethodPanelFactory;
 import com.p3rry.components.weldingmethod.WeldingMethodSelectionPanel;
 import com.p3rry.consts.JointType;
@@ -21,9 +19,8 @@ import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSetter, ActionListener {
     private static final int FRAME_WIDTH = 495;
@@ -33,34 +30,30 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
     private JointSelectionPanel jointSelectionPanel;
     private WeldingMethodSelectionPanel weldingMethodSelectionPanel;
 
-    private AbstractJointPanel kBevelJointPanel;
-    private AbstractJointPanel noBevelJointPanel;
-    private AbstractJointPanel uBevelJointPanel;
-    private AbstractJointPanel vBevelJointPanel;
-    private AbstractJointPanel xBevelJointPanel;
-    private AbstractJointPanel yBevelJointPanel;
-    private AbstractJointPanel tSingleSidedJointPanel;
+    private JointPanel kBevelJointPanel, noBevelJointPanel,
+            uBevelJointPanel, vBevelJointPanel,
+            xBevelJointPanel, yBevelJointPanel,
+            tSingleSidedJointPanel;
 
-    private AbstractWeldingMethodPanel smawPanel;
-    private AbstractWeldingMethodPanel gmawPanel;
-    private AbstractWeldingMethodPanel gtawPanel;
+    private WeldingMethodPanel smawPanel, gmawPanel,
+            gtawPanel;
 
     private ControlPanel controlPanel;
     private ResultPanel resultPanel;
     private BaseMaterialDensityPanel baseMaterialDensityPanel;
 
     private double count;
-    private AbstractJointPanel currentPanel;
-    private AbstractWeldingMethodPanel currentWeldingMethod;
+    private JointPanel currentPanel;
+    private WeldingMethodPanel currentWeldingMethod;
 
     public Frame() {
-        this.kBevelJointPanel = JointPanelFactory.createJointPanel(JointType.K_BEVEL_JOINT);
         this.noBevelJointPanel = JointPanelFactory.createJointPanel(JointType.NO_BEVEL_JOINT);
-        this.uBevelJointPanel = JointPanelFactory.createJointPanel(JointType.U_BEVEL_JOINT);
         this.vBevelJointPanel = JointPanelFactory.createJointPanel(JointType.V_BEVEL_JOINT);
-        this.xBevelJointPanel = JointPanelFactory.createJointPanel(JointType.X_BEVEL_JOINT);
-        this.yBevelJointPanel = JointPanelFactory.createJointPanel(JointType.Y_BEVEL_JOINT);
+        this.uBevelJointPanel = JointPanelFactory.createJointPanel(JointType.U_BEVEL_JOINT);
         this.tSingleSidedJointPanel = JointPanelFactory.createJointPanel(JointType.T_SINGLE_SIDED_JOINT);
+        this.yBevelJointPanel = JointPanelFactory.createJointPanel(JointType.Y_BEVEL_JOINT);
+        this.kBevelJointPanel = JointPanelFactory.createJointPanel(JointType.K_BEVEL_JOINT);
+        this.xBevelJointPanel = JointPanelFactory.createJointPanel(JointType.X_BEVEL_JOINT);
 
         this.smawPanel = WeldingMethodPanelFactory.createWeldingMethod(WeldingMethodType.SMAW);
         this.gmawPanel = WeldingMethodPanelFactory.createWeldingMethod(WeldingMethodType.GMAW);
@@ -75,6 +68,9 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         setSelfComponent();
         addComponents();
         addListeners();
+
+        initJointPanel();
+        initWeldingMethodPanel();
     }
 
     public void addListeners() {
@@ -139,7 +135,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
             case U_BEVEL_JOINT -> setCurrentJoint(uBevelJointPanel);
             case T_SINGLE_SIDED_JOINT -> setCurrentJoint(tSingleSidedJointPanel);
             default ->
-                    throw new IllegalArgumentException("Issues bevel joint panels! Invalid value of enumeration type!");
+                    throw new IllegalArgumentException("Issues with joint panels! Invalid value of enumeration type!");
         }
     }
 
@@ -151,13 +147,13 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
             case GMAW -> setCurrentWeldingMethod(gmawPanel);
             case GTAW -> setCurrentWeldingMethod(gtawPanel);
             default ->
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException("Issues with welding method panels! Invalid value of enumeration type!");
         }
     }
 
     private void handleCleanWeldingMethodPanelButton() {
         if(currentWeldingMethod == null) {
-            InputMessages.displaySelectPanel("WeldingMethod");
+            InputMessages.displayNoSelectedPanel("WeldingMethod");
             System.err.println("Select welding method panel!");
         } else {
             if(checkIfAllComponentsAreEmpty(currentWeldingMethod.getTextComponentsList())) {
@@ -170,7 +166,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
 
     private void handleCleanJointPanelButton() {
         if(currentPanel == null) {
-            InputMessages.displaySelectPanel("JointPanel");
+            InputMessages.displayNoSelectedPanel("JointPanel");
             System.err.println("Select joint panel!");
         } else {
             if(checkIfAllComponentsAreEmpty(currentPanel.getTextComponentsList())) {
@@ -193,7 +189,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         if(currentPanel == null ||
                 currentWeldingMethod == null) {
             System.err.println("Select panels!");
-            InputMessages.displaySelectPanel("BothPanels");
+            InputMessages.displayNoSelectedPanel("BothPanels");
         } else {
             if (checkIfAnyComponentIsEmpty(currentPanel.getTextComponentsList()) ||
                     checkIfAnyComponentIsEmpty(currentWeldingMethod.getTextComponentsList()) ||
@@ -253,7 +249,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         resultPanel.getResultTextField().setText(String.valueOf(0));
     }
 
-    private void setCurrentWeldingMethod(@NonNull AbstractWeldingMethodPanel weldingMethodPanel) {
+    private void setCurrentWeldingMethod(@NonNull WeldingMethodPanel weldingMethodPanel) {
         if(currentWeldingMethod == null)
             this.add(weldingMethodPanel.getPanel());
         else {
@@ -266,7 +262,7 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         resetResult();
     }
 
-    private void setCurrentJoint(@NonNull AbstractJointPanel jointPanel) {
+    private void setCurrentJoint(@NonNull JointPanel jointPanel) {
         if(currentPanel == null)
             this.add(jointPanel.getPanel());
         else {
@@ -278,18 +274,28 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         currentPanel = jointPanel;
     }
 
-    private void cleanComponents(List<JTextComponent> textComponentList) {
+    private void initJointPanel() {
+        currentPanel = noBevelJointPanel;
+        this.add(currentPanel.getPanel());
+    }
+
+    private void initWeldingMethodPanel() {
+        currentWeldingMethod = gmawPanel;
+        this.add(currentWeldingMethod.getPanel());
+    }
+
+    private void cleanComponents(@NonNull List<JTextComponent> textComponentList) {
         textComponentList.forEach(textComponent ->
                 textComponent.setText(""));
     }
 
-    private boolean checkIfAnyComponentIsEmpty(List<JTextComponent> textComponentList) {
+    private boolean checkIfAnyComponentIsEmpty(@NonNull List<JTextComponent> textComponentList) {
         return textComponentList.stream()
                 .anyMatch(textComponent ->
                         textComponent.getText().isEmpty());
     }
 
-    private boolean checkIfAllComponentsAreEmpty(List<JTextComponent> textComponentList) {
+    private boolean checkIfAllComponentsAreEmpty(@NonNull List<JTextComponent> textComponentList) {
         return textComponentList.stream()
                 .allMatch(textComponent ->
                         textComponent.getText().isEmpty());

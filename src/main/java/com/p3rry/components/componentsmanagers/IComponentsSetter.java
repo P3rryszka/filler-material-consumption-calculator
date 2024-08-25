@@ -11,8 +11,8 @@ public interface IComponentsSetter {
 
     default <T extends JComponent> void positionComponentsWithOffset(@NonNull List<T> list, int xPosition,
                                             int yPosition, int width, int height,
-                                            int index, int summand) {
-        for(int i = index; i < list.size(); i++) {
+                                                                     int summand) {
+        for(int i = 0; i < list.size(); i++) {
             list.get(i).setBounds(xPosition, yPosition, width, height);
             yPosition += summand;
         }
