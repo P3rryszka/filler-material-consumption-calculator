@@ -1,6 +1,6 @@
 package com.p3rry;
 
-import com.p3rry.components.Frame;
+import com.p3rry.ui.Frame;
 
 import javax.swing.*;
 
