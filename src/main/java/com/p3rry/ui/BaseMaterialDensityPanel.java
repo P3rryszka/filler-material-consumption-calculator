@@ -28,7 +28,7 @@ public class BaseMaterialDensityPanel implements ISelfComponentSetter, IComponen
 
     public BaseMaterialDensityPanel() {
         this.panel = new JPanel();
-        this.baseMaterialDensityLabel = new JLabel("Base material density [g/cm^3]:");
+        this.baseMaterialDensityLabel = new JLabel("Base density [g/cm^3]:");
         this.baseMaterialDensityTextField = InputBlocker.numberLimitInput();
 
         setSelfComponent();

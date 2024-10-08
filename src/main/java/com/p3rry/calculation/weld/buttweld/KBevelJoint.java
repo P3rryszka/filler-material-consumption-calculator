@@ -1,12 +1,11 @@
 package com.p3rry.calculation.weld.buttweld;
 
-import com.p3rry.calculation.calculationmanager.IAngleOperations;
 import com.p3rry.calculation.calculationmanager.IGrooveOperations;
 import com.p3rry.calculation.calculationmanager.IWeldOperations;
 import com.p3rry.calculation.weld.AbstractButtWeld;
 import com.p3rry.consts.QualityLevel;
 
-public class KBevelJoint extends AbstractButtWeld implements IGrooveOperations, IAngleOperations, IWeldOperations {
+public class KBevelJoint extends AbstractButtWeld implements IGrooveOperations, IWeldOperations {
     private double bevelAngle;
     private double bead;
 
@@ -20,12 +19,12 @@ public class KBevelJoint extends AbstractButtWeld implements IGrooveOperations, 
 
     @Override
     public double calculateGrooveWidth() {
-        return (convertIntoDegrees(bevelAngle, 1.0) * ((thickness - bead) / 2.0) + gap);
+        return (calculateTan(bevelAngle, 1.0) * ((thickness - bead) / 2.0) + gap);
     }
 
     @Override
     public double calculateGrooveSectionArea() {
-        return (convertIntoDegrees(bevelAngle, 1.0) * Math.pow(((thickness - bead) / 2.0),2.0) + thickness * gap);
+        return (calculateTan(bevelAngle, 1.0) * Math.pow(((thickness - bead) / 2.0),2.0) + thickness * gap);
     }
 
     @Override

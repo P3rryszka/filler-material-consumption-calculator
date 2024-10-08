@@ -37,7 +37,7 @@ public class ControlPanel implements ISelfComponentSetter, IComponentsAdder, ICo
         this.cleanJointPanelButton = new JButton("JC");
         this.cleanWeldingMethodPanelButton = new JButton("MC");
         this.resetButton = new JButton("R");
-        this.cleanDensityPanelButton = new JButton("D");
+        this.cleanDensityPanelButton = new JButton("DC");
 
         setSelfComponent();
         setComponents();

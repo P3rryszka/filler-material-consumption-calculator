@@ -4,7 +4,7 @@ import com.p3rry.calculation.calculationmanager.*;
 import com.p3rry.calculation.weld.AbstractButtWeld;
 import com.p3rry.consts.QualityLevel;
 
-public class VBevelJoint extends AbstractButtWeld implements IGrooveOperations, IAngleOperations, IWeldOperations, IWeldFaceOperations, IRootOperations {
+public class VBevelJoint extends AbstractButtWeld implements IGrooveOperations, IWeldOperations, IRootOperations {
     private double bevelAngle;
 
     public VBevelJoint(double thickness, QualityLevel qualityLevel,
@@ -15,12 +15,12 @@ public class VBevelJoint extends AbstractButtWeld implements IGrooveOperations, 
 
     @Override
     public double calculateGrooveWidth() {
-        return (2.0 * thickness * convertIntoDegrees(bevelAngle, 2.0) + gap);
+        return (2.0 * thickness * calculateTan(bevelAngle, 2.0) + gap);
     }
 
     @Override
     public double calculateGrooveSectionArea() {
-        return (thickness * (gap + thickness * convertIntoDegrees(bevelAngle, 2.0)));
+        return (thickness * (gap + thickness * calculateTan(bevelAngle, 2.0)));
     }
 
     @Override

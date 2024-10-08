@@ -1,12 +1,12 @@
 package com.p3rry.calculation.additionalmaterial;
 
-import com.p3rry.calculation.calculationmanager.IAdditionalMaterialOperations;
+import com.p3rry.calculation.calculationmanager.IFillerMaterialOperations;
 import com.p3rry.consts.CommonProperties;
 import com.p3rry.utlis.InputMessages;
 
 import java.util.Optional;
 
-public class GtawAdditionalMaterial implements IAdditionalMaterialOperations{
+public class GtawMethod implements IFillerMaterialOperations {
     private static final double EFFECTIVE_ROD_LENGTH = 0.96;
     private static final double ROD_LENGTH_LIMIT = 0;
     private static final double ROD_DIAMETER_LIMIT = 0;
@@ -14,8 +14,8 @@ public class GtawAdditionalMaterial implements IAdditionalMaterialOperations{
     private double rodDiameter;
     private double density;
 
-    public GtawAdditionalMaterial(double effectiveRodLength, double rodDiameter,
-                                  double density) {
+    public GtawMethod(double effectiveRodLength, double rodDiameter,
+                      double density) {
         this.effectiveRodLength = Optional.of(effectiveRodLength * EFFECTIVE_ROD_LENGTH)
                 .filter(rl -> rl > ROD_LENGTH_LIMIT)
                 .orElseThrow(() -> {
@@ -35,17 +35,17 @@ public class GtawAdditionalMaterial implements IAdditionalMaterialOperations{
                 });
 
         this.density = Optional.of(density)
-                .filter(d -> d > CommonProperties.FILLER_MATERIAL_DENSITY_MATERIAL)
+                .filter(d -> d > CommonProperties.FILLER_MATERIAL_DENSITY)
                 .orElseThrow(() -> {
                     InputMessages.displayThisParamCannotBe(
-                            CommonProperties.FILLER_MATERIAL_DENSITY_MATERIAL, "<=", "Filler material density"
+                            CommonProperties.FILLER_MATERIAL_DENSITY, "<=", "Filler material density"
                     );
-                    return new IllegalArgumentException("Filler material density cannot be <= " + CommonProperties.FILLER_MATERIAL_DENSITY_MATERIAL);
+                    return new IllegalArgumentException("Filler material density cannot be <= " + CommonProperties.FILLER_MATERIAL_DENSITY);
                 });
     }
 
     @Override
-    public double calculateNeededAdditionalMaterial(double jointMass) {
+    public double calculateFillerMaterial(double jointMass) {
         return jointMass / (
                 calculateCylinderShapeMass(density,
                         rodDiameter,

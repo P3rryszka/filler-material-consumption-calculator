@@ -1,6 +1,7 @@
 package com.p3rry.calculation.weld;
 
 import com.p3rry.calculation.calculationmanager.IWeldOperations;
+import com.p3rry.consts.CommonProperties;
 import com.p3rry.utlis.InputMessages;
 import lombok.NonNull;
 
@@ -44,6 +45,6 @@ public class Mass {
     }
 
     public double calculateMass() {
-        return calculateVolume() * baseMaterialDensity;
+        return calculateVolume() * baseMaterialDensity * CommonProperties.TO_KG_MM3_FACTOR;
     }
 }

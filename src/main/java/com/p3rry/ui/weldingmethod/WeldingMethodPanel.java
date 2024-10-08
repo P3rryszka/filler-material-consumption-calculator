@@ -56,9 +56,9 @@ public class WeldingMethodPanel implements ISelfComponentSetter, IComponentsAdde
     public void setComponents() {
 
         this.name.setBounds(10, 0,
-                WeldingMethodLabels.LABEL_WIDTH, WeldingMethodLabels.LABEL_HEIGHT);
+                WeldingMethodLabel.LABEL_WIDTH, WeldingMethodLabel.LABEL_HEIGHT);
         positionComponentsWithOffset(labelsList, 10, 30,
-                WeldingMethodLabels.LABEL_WIDTH, WeldingMethodLabels.LABEL_HEIGHT, 70);
+                WeldingMethodLabel.LABEL_WIDTH, WeldingMethodLabel.LABEL_HEIGHT, 70);
         positionComponentsWithOffset(textComponentsList, 10, 60,
                 WeldingMethodTextComponents.TEXT_COMPONENT_WIDTH, WeldingMethodTextComponents.TEXT_COMPONENT_HEIGHT, 70);
     }

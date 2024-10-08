@@ -4,7 +4,7 @@ import com.p3rry.calculation.calculationmanager.*;
 import com.p3rry.calculation.weld.AbstractButtWeld;
 import com.p3rry.consts.QualityLevel;
 
-public class NoBevelJoint extends AbstractButtWeld implements IGrooveOperations, IAngleOperations, IWeldOperations, IWeldFaceOperations, IRootOperations {
+public class NoBevelJoint extends AbstractButtWeld implements IGrooveOperations, IWeldOperations, IRootOperations {
     public NoBevelJoint(double thickness, QualityLevel qualityLevel, double gap) {
         super(thickness, qualityLevel, gap);
     }

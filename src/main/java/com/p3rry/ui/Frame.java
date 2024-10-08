@@ -1,6 +1,6 @@
 package com.p3rry.ui;
 
-import com.p3rry.calculation.additionalmaterial.AdditionalMaterialCalculator;
+import com.p3rry.calculation.additionalmaterial.FillerMaterialCalculator;
 import com.p3rry.calculation.MassCalculator;
 import com.p3rry.ui.componentmanager.IComponentsAdder;
 import com.p3rry.ui.componentmanager.ISelfComponentSetter;
@@ -68,9 +68,6 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         setSelfComponent();
         addComponents();
         addListeners();
-
-        initJointPanel();
-        initWeldingMethodPanel();
     }
 
     private void addListeners() {
@@ -217,24 +214,24 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
                 else
                     throw new IllegalArgumentException("Current joint panel is invalid!");
 
-                double additionalMaterial;
+                double fillerMaterial;
                 if (currentWeldingMethod == gmawPanel)
-                    additionalMaterial = AdditionalMaterialCalculator.calculateGmawAdditionalMaterial(gmawPanel, mass);
+                    fillerMaterial = FillerMaterialCalculator.calculateGmawAdditionalMaterial(gmawPanel, mass);
                 else if (currentWeldingMethod == smawPanel)
-                    additionalMaterial = AdditionalMaterialCalculator.calculateSmawAdditionalMaterial(smawPanel, mass);
+                    fillerMaterial = FillerMaterialCalculator.calculateSmawAdditionalMaterial(smawPanel, mass);
                 else if (currentWeldingMethod == gtawPanel)
-                    additionalMaterial = AdditionalMaterialCalculator.calculateGtawAdditionalMaterial(gtawPanel, mass);
+                    fillerMaterial = FillerMaterialCalculator.calculateGtawAdditionalMaterial(gtawPanel, mass);
                 else
                     throw new IllegalArgumentException("Current welding method panel is invalid!");
 
-                count += additionalMaterial;
+                count += fillerMaterial;
                 resultPanel.getResultTextField().setText(String.valueOf((int) count + 1));
 
                 //Mass checkpoint
                 System.out.println("Mass checkpoint: " + mass);
 
                 //Additional material checkpoint
-                System.out.println("Additional material checkpoint: " + additionalMaterial);
+                System.out.println("Additional material checkpoint: " + fillerMaterial);
 
                 //Sum of additional material -> count checkpoint
                 System.out.println("Sum of additional material checkpoint: " + count);
@@ -255,9 +252,9 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         else {
             this.remove(currentWeldingMethod.getPanel());
             this.add(weldingMethodPanel.getPanel());
-            this.revalidate();
-            this.repaint();
         }
+        this.revalidate();
+        this.repaint();
         currentWeldingMethod = weldingMethodPanel;
         resetResult();
     }
@@ -268,50 +265,34 @@ public class Frame extends JFrame implements IComponentsAdder, ISelfComponentSet
         else {
             this.remove(currentPanel.getPanel());
             this.add(jointPanel.getPanel());
-            this.revalidate();
-            this.repaint();
         }
+        this.revalidate();
+        this.repaint();
         currentPanel = jointPanel;
     }
 
-    private void initJointPanel() {
-        currentPanel = noBevelJointPanel;
-        this.add(currentPanel.getPanel());
-    }
-
-    private void initWeldingMethodPanel() {
-        currentWeldingMethod = gmawPanel;
-        this.add(currentWeldingMethod.getPanel());
-    }
-
-    private void cleanComponents(@NonNull List<JTextComponent> textComponentList) {
-        textComponentList.forEach(textComponent ->
+    private void cleanComponents(@NonNull List<JTextComponent> list) {
+        list.forEach(textComponent ->
                 textComponent.setText(""));
     }
 
-    private boolean checkIfAnyComponentIsEmpty(@NonNull List<JTextComponent> textComponentList) {
-        return textComponentList.stream()
+    private boolean checkIfAnyComponentIsEmpty(@NonNull List<JTextComponent> list) {
+        return list.stream()
                 .anyMatch(textComponent ->
                         textComponent.getText().isEmpty());
     }
 
-    private boolean checkIfAllComponentsAreEmpty(@NonNull List<JTextComponent> textComponentList) {
-        return textComponentList.stream()
+    private boolean checkIfAllComponentsAreEmpty(@NonNull List<JTextComponent> list) {
+        return list.stream()
                 .allMatch(textComponent ->
                         textComponent.getText().isEmpty());
     }
 
     private double parseBaseMaterialDensityPanelText() {
-        try {
-            double temp = Optional.ofNullable(baseMaterialDensityPanel.getBaseMaterialDensityTextField().getText())
+            return Optional.ofNullable(baseMaterialDensityPanel.getBaseMaterialDensityTextField().getText())
                     .map(Double::parseDouble)
                     .orElseThrow(() ->
                             new IllegalArgumentException("Parsing value within base material density panel is null!")
                     );
-
-            return temp * CommonProperties.TO_KG_MM3_FACTOR;
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("Invalid input within base material density panel!");
-        }
     }
 }

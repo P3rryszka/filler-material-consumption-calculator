@@ -8,7 +8,7 @@ import com.p3rry.consts.QualityLevel;
 
 import java.util.Optional;
 
-public class UBevelJoint extends AbstractButtWeld implements IGrooveOperations, IAngleOperations, IWeldOperations, IWeldFaceOperations, IRootOperations {
+public class UBevelJoint extends AbstractButtWeld implements IGrooveOperations, IWeldOperations, IRootOperations {
     private double bevelAngle;
     private double bead;
     private double rounding;
@@ -31,7 +31,7 @@ public class UBevelJoint extends AbstractButtWeld implements IGrooveOperations, 
 
     @Override
     public double calculateGrooveWidth() {
-        return (2.0 * convertIntoDegrees(bevelAngle, 2.0) *
+        return (2.0 * calculateTan(bevelAngle, 2.0) *
                 (thickness - (rounding + bead)) +
                 2.0 * rounding + gap);
     }
@@ -41,7 +41,7 @@ public class UBevelJoint extends AbstractButtWeld implements IGrooveOperations, 
         return (((Math.PI * Math.pow(rounding, 2.0)) / 4.0) +
                 thickness * gap +
                 (2 * rounding + (thickness - (rounding + bead)) *
-                        convertIntoDegrees(bevelAngle, 2.0)) *
+                        calculateTan(bevelAngle, 2.0)) *
                         (thickness - (rounding + bead)));
     }
 

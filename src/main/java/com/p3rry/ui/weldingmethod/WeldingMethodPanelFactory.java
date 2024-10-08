@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class WeldingMethodPanelFactory {
     public static WeldingMethodPanel createWeldingMethod(@NonNull WeldingMethodType weldingMethodType) {
-        WeldingMethodLabels weldingMethodLabels = new WeldingMethodLabels();
+        WeldingMethodLabel weldingMethodLabel = new WeldingMethodLabel();
         WeldingMethodTextComponents weldingMethodTextComponents = new WeldingMethodTextComponents();
 
         switch (weldingMethodType) {
@@ -17,7 +17,7 @@ public class WeldingMethodPanelFactory {
                        .name(new JLabel("GMAW"))
                        .labelsList(
                                Arrays.asList(
-                                       weldingMethodLabels.getWireSpoolMassLabel()
+                                       weldingMethodLabel.getWireSpoolMassLabel()
                                )
                        )
                        .textComponentList(
@@ -32,10 +32,10 @@ public class WeldingMethodPanelFactory {
                         .name(new JLabel("SMAW"))
                         .labelsList(
                                 Arrays.asList(
-                                        weldingMethodLabels.getElectrodeLengthLabel(),
-                                        weldingMethodLabels.getElectrodeDiameterLabel(),
-                                        weldingMethodLabels.getElectrodeYieldLabel(),
-                                        weldingMethodLabels.getDensityLabel()
+                                        weldingMethodLabel.getElectrodeLengthLabel(),
+                                        weldingMethodLabel.getElectrodeDiameterLabel(),
+                                        weldingMethodLabel.getElectrodeYieldLabel(),
+                                        weldingMethodLabel.getDensityLabel()
                                 )
                         )
                         .textComponentList(
@@ -53,9 +53,9 @@ public class WeldingMethodPanelFactory {
                         .name(new JLabel("GTAW"))
                         .labelsList(
                                 Arrays.asList(
-                                        weldingMethodLabels.getRodLengthLabel(),
-                                        weldingMethodLabels.getRodDiameterLabel(),
-                                        weldingMethodLabels.getDensityLabel()
+                                        weldingMethodLabel.getRodLengthLabel(),
+                                        weldingMethodLabel.getRodDiameterLabel(),
+                                        weldingMethodLabel.getDensityLabel()
                                 )
                         )
                         .textComponentList(
